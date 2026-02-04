@@ -1,0 +1,1 @@
+docker run -d --name job-marketplace-db -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=JobMarketplace -p 3306:3306 mysql:8.0
