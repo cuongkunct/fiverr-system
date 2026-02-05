@@ -217,7 +217,7 @@ export type UsersGroupByOutputType = {
   phone: string | null
   birth_day: Date | null
   gender: string | null
-  role: string | null
+  role: string
   skill: string | null
   certification: string | null
   _count: UsersCountAggregateOutputType | null
@@ -253,7 +253,7 @@ export type UsersWhereInput = {
   phone?: Prisma.StringNullableFilter<"Users"> | string | null
   birth_day?: Prisma.DateTimeNullableFilter<"Users"> | Date | string | null
   gender?: Prisma.StringNullableFilter<"Users"> | string | null
-  role?: Prisma.StringNullableFilter<"Users"> | string | null
+  role?: Prisma.StringFilter<"Users"> | string
   skill?: Prisma.StringNullableFilter<"Users"> | string | null
   certification?: Prisma.StringNullableFilter<"Users"> | string | null
   Comments?: Prisma.CommentsListRelationFilter
@@ -269,7 +269,7 @@ export type UsersOrderByWithRelationInput = {
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   birth_day?: Prisma.SortOrderInput | Prisma.SortOrder
   gender?: Prisma.SortOrderInput | Prisma.SortOrder
-  role?: Prisma.SortOrderInput | Prisma.SortOrder
+  role?: Prisma.SortOrder
   skill?: Prisma.SortOrderInput | Prisma.SortOrder
   certification?: Prisma.SortOrderInput | Prisma.SortOrder
   Comments?: Prisma.CommentsOrderByRelationAggregateInput
@@ -289,7 +289,7 @@ export type UsersWhereUniqueInput = Prisma.AtLeast<{
   phone?: Prisma.StringNullableFilter<"Users"> | string | null
   birth_day?: Prisma.DateTimeNullableFilter<"Users"> | Date | string | null
   gender?: Prisma.StringNullableFilter<"Users"> | string | null
-  role?: Prisma.StringNullableFilter<"Users"> | string | null
+  role?: Prisma.StringFilter<"Users"> | string
   skill?: Prisma.StringNullableFilter<"Users"> | string | null
   certification?: Prisma.StringNullableFilter<"Users"> | string | null
   Comments?: Prisma.CommentsListRelationFilter
@@ -305,7 +305,7 @@ export type UsersOrderByWithAggregationInput = {
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   birth_day?: Prisma.SortOrderInput | Prisma.SortOrder
   gender?: Prisma.SortOrderInput | Prisma.SortOrder
-  role?: Prisma.SortOrderInput | Prisma.SortOrder
+  role?: Prisma.SortOrder
   skill?: Prisma.SortOrderInput | Prisma.SortOrder
   certification?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UsersCountOrderByAggregateInput
@@ -326,7 +326,7 @@ export type UsersScalarWhereWithAggregatesInput = {
   phone?: Prisma.StringNullableWithAggregatesFilter<"Users"> | string | null
   birth_day?: Prisma.DateTimeNullableWithAggregatesFilter<"Users"> | Date | string | null
   gender?: Prisma.StringNullableWithAggregatesFilter<"Users"> | string | null
-  role?: Prisma.StringNullableWithAggregatesFilter<"Users"> | string | null
+  role?: Prisma.StringWithAggregatesFilter<"Users"> | string
   skill?: Prisma.StringNullableWithAggregatesFilter<"Users"> | string | null
   certification?: Prisma.StringNullableWithAggregatesFilter<"Users"> | string | null
 }
@@ -338,7 +338,7 @@ export type UsersCreateInput = {
   phone?: string | null
   birth_day?: Date | string | null
   gender?: string | null
-  role?: string | null
+  role: string
   skill?: string | null
   certification?: string | null
   Comments?: Prisma.CommentsCreateNestedManyWithoutUsersInput
@@ -354,7 +354,7 @@ export type UsersUncheckedCreateInput = {
   phone?: string | null
   birth_day?: Date | string | null
   gender?: string | null
-  role?: string | null
+  role: string
   skill?: string | null
   certification?: string | null
   Comments?: Prisma.CommentsUncheckedCreateNestedManyWithoutUsersInput
@@ -369,7 +369,7 @@ export type UsersUpdateInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birth_day?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   skill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   certification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   Comments?: Prisma.CommentsUpdateManyWithoutUsersNestedInput
@@ -385,7 +385,7 @@ export type UsersUncheckedUpdateInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birth_day?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   skill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   certification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   Comments?: Prisma.CommentsUncheckedUpdateManyWithoutUsersNestedInput
@@ -401,7 +401,7 @@ export type UsersCreateManyInput = {
   phone?: string | null
   birth_day?: Date | string | null
   gender?: string | null
-  role?: string | null
+  role: string
   skill?: string | null
   certification?: string | null
 }
@@ -413,7 +413,7 @@ export type UsersUpdateManyMutationInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birth_day?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   skill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   certification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -426,7 +426,7 @@ export type UsersUncheckedUpdateManyInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birth_day?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   skill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   certification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -544,7 +544,7 @@ export type UsersCreateWithoutCommentsInput = {
   phone?: string | null
   birth_day?: Date | string | null
   gender?: string | null
-  role?: string | null
+  role: string
   skill?: string | null
   certification?: string | null
   HiredJobs?: Prisma.HiredJobsCreateNestedManyWithoutUsersInput
@@ -559,7 +559,7 @@ export type UsersUncheckedCreateWithoutCommentsInput = {
   phone?: string | null
   birth_day?: Date | string | null
   gender?: string | null
-  role?: string | null
+  role: string
   skill?: string | null
   certification?: string | null
   HiredJobs?: Prisma.HiredJobsUncheckedCreateNestedManyWithoutUsersInput
@@ -589,7 +589,7 @@ export type UsersUpdateWithoutCommentsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birth_day?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   skill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   certification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   HiredJobs?: Prisma.HiredJobsUpdateManyWithoutUsersNestedInput
@@ -604,7 +604,7 @@ export type UsersUncheckedUpdateWithoutCommentsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birth_day?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   skill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   certification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   HiredJobs?: Prisma.HiredJobsUncheckedUpdateManyWithoutUsersNestedInput
@@ -618,7 +618,7 @@ export type UsersCreateWithoutHiredJobsInput = {
   phone?: string | null
   birth_day?: Date | string | null
   gender?: string | null
-  role?: string | null
+  role: string
   skill?: string | null
   certification?: string | null
   Comments?: Prisma.CommentsCreateNestedManyWithoutUsersInput
@@ -633,7 +633,7 @@ export type UsersUncheckedCreateWithoutHiredJobsInput = {
   phone?: string | null
   birth_day?: Date | string | null
   gender?: string | null
-  role?: string | null
+  role: string
   skill?: string | null
   certification?: string | null
   Comments?: Prisma.CommentsUncheckedCreateNestedManyWithoutUsersInput
@@ -663,7 +663,7 @@ export type UsersUpdateWithoutHiredJobsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birth_day?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   skill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   certification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   Comments?: Prisma.CommentsUpdateManyWithoutUsersNestedInput
@@ -678,7 +678,7 @@ export type UsersUncheckedUpdateWithoutHiredJobsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birth_day?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   skill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   certification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   Comments?: Prisma.CommentsUncheckedUpdateManyWithoutUsersNestedInput
@@ -692,7 +692,7 @@ export type UsersCreateWithoutJobsInput = {
   phone?: string | null
   birth_day?: Date | string | null
   gender?: string | null
-  role?: string | null
+  role: string
   skill?: string | null
   certification?: string | null
   Comments?: Prisma.CommentsCreateNestedManyWithoutUsersInput
@@ -707,7 +707,7 @@ export type UsersUncheckedCreateWithoutJobsInput = {
   phone?: string | null
   birth_day?: Date | string | null
   gender?: string | null
-  role?: string | null
+  role: string
   skill?: string | null
   certification?: string | null
   Comments?: Prisma.CommentsUncheckedCreateNestedManyWithoutUsersInput
@@ -737,7 +737,7 @@ export type UsersUpdateWithoutJobsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birth_day?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   skill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   certification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   Comments?: Prisma.CommentsUpdateManyWithoutUsersNestedInput
@@ -752,7 +752,7 @@ export type UsersUncheckedUpdateWithoutJobsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   birth_day?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   skill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   certification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   Comments?: Prisma.CommentsUncheckedUpdateManyWithoutUsersNestedInput
@@ -863,7 +863,7 @@ export type $UsersPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     phone: string | null
     birth_day: Date | null
     gender: string | null
-    role: string | null
+    role: string
     skill: string | null
     certification: string | null
   }, ExtArgs["result"]["users"]>

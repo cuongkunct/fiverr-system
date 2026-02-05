@@ -80,7 +80,7 @@ model Users {
   phone         String?     @db.VarChar(20)
   birth_day     DateTime?   @db.Date
   gender        String?     @db.VarChar(10)
-  role          String?     @db.VarChar(50)
+  role          String      @db.VarChar(50)
   skill         String?     @db.Text
   certification String?     @db.Text
   Comments      Comments[]
