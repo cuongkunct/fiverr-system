@@ -44,6 +44,7 @@ export type HiredJobsMinAggregateOutputType = {
   hirer_id: number | null
   hire_date: Date | null
   is_completed: boolean | null
+  create_date: Date | null
 }
 
 export type HiredJobsMaxAggregateOutputType = {
@@ -52,6 +53,7 @@ export type HiredJobsMaxAggregateOutputType = {
   hirer_id: number | null
   hire_date: Date | null
   is_completed: boolean | null
+  create_date: Date | null
 }
 
 export type HiredJobsCountAggregateOutputType = {
@@ -60,6 +62,7 @@ export type HiredJobsCountAggregateOutputType = {
   hirer_id: number
   hire_date: number
   is_completed: number
+  create_date: number
   _all: number
 }
 
@@ -82,6 +85,7 @@ export type HiredJobsMinAggregateInputType = {
   hirer_id?: true
   hire_date?: true
   is_completed?: true
+  create_date?: true
 }
 
 export type HiredJobsMaxAggregateInputType = {
@@ -90,6 +94,7 @@ export type HiredJobsMaxAggregateInputType = {
   hirer_id?: true
   hire_date?: true
   is_completed?: true
+  create_date?: true
 }
 
 export type HiredJobsCountAggregateInputType = {
@@ -98,6 +103,7 @@ export type HiredJobsCountAggregateInputType = {
   hirer_id?: true
   hire_date?: true
   is_completed?: true
+  create_date?: true
   _all?: true
 }
 
@@ -193,6 +199,7 @@ export type HiredJobsGroupByOutputType = {
   hirer_id: number | null
   hire_date: Date | null
   is_completed: boolean | null
+  create_date: Date | null
   _count: HiredJobsCountAggregateOutputType | null
   _avg: HiredJobsAvgAggregateOutputType | null
   _sum: HiredJobsSumAggregateOutputType | null
@@ -224,6 +231,7 @@ export type HiredJobsWhereInput = {
   hirer_id?: Prisma.IntNullableFilter<"HiredJobs"> | number | null
   hire_date?: Prisma.DateTimeNullableFilter<"HiredJobs"> | Date | string | null
   is_completed?: Prisma.BoolNullableFilter<"HiredJobs"> | boolean | null
+  create_date?: Prisma.DateTimeNullableFilter<"HiredJobs"> | Date | string | null
   Jobs?: Prisma.XOR<Prisma.JobsNullableScalarRelationFilter, Prisma.JobsWhereInput> | null
   Users?: Prisma.XOR<Prisma.UsersNullableScalarRelationFilter, Prisma.UsersWhereInput> | null
 }
@@ -234,6 +242,7 @@ export type HiredJobsOrderByWithRelationInput = {
   hirer_id?: Prisma.SortOrderInput | Prisma.SortOrder
   hire_date?: Prisma.SortOrderInput | Prisma.SortOrder
   is_completed?: Prisma.SortOrderInput | Prisma.SortOrder
+  create_date?: Prisma.SortOrderInput | Prisma.SortOrder
   Jobs?: Prisma.JobsOrderByWithRelationInput
   Users?: Prisma.UsersOrderByWithRelationInput
 }
@@ -247,6 +256,7 @@ export type HiredJobsWhereUniqueInput = Prisma.AtLeast<{
   hirer_id?: Prisma.IntNullableFilter<"HiredJobs"> | number | null
   hire_date?: Prisma.DateTimeNullableFilter<"HiredJobs"> | Date | string | null
   is_completed?: Prisma.BoolNullableFilter<"HiredJobs"> | boolean | null
+  create_date?: Prisma.DateTimeNullableFilter<"HiredJobs"> | Date | string | null
   Jobs?: Prisma.XOR<Prisma.JobsNullableScalarRelationFilter, Prisma.JobsWhereInput> | null
   Users?: Prisma.XOR<Prisma.UsersNullableScalarRelationFilter, Prisma.UsersWhereInput> | null
 }, "id">
@@ -257,6 +267,7 @@ export type HiredJobsOrderByWithAggregationInput = {
   hirer_id?: Prisma.SortOrderInput | Prisma.SortOrder
   hire_date?: Prisma.SortOrderInput | Prisma.SortOrder
   is_completed?: Prisma.SortOrderInput | Prisma.SortOrder
+  create_date?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.HiredJobsCountOrderByAggregateInput
   _avg?: Prisma.HiredJobsAvgOrderByAggregateInput
   _max?: Prisma.HiredJobsMaxOrderByAggregateInput
@@ -273,11 +284,13 @@ export type HiredJobsScalarWhereWithAggregatesInput = {
   hirer_id?: Prisma.IntNullableWithAggregatesFilter<"HiredJobs"> | number | null
   hire_date?: Prisma.DateTimeNullableWithAggregatesFilter<"HiredJobs"> | Date | string | null
   is_completed?: Prisma.BoolNullableWithAggregatesFilter<"HiredJobs"> | boolean | null
+  create_date?: Prisma.DateTimeNullableWithAggregatesFilter<"HiredJobs"> | Date | string | null
 }
 
 export type HiredJobsCreateInput = {
   hire_date?: Date | string | null
   is_completed?: boolean | null
+  create_date?: Date | string | null
   Jobs?: Prisma.JobsCreateNestedOneWithoutHiredJobsInput
   Users?: Prisma.UsersCreateNestedOneWithoutHiredJobsInput
 }
@@ -288,11 +301,13 @@ export type HiredJobsUncheckedCreateInput = {
   hirer_id?: number | null
   hire_date?: Date | string | null
   is_completed?: boolean | null
+  create_date?: Date | string | null
 }
 
 export type HiredJobsUpdateInput = {
   hire_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Jobs?: Prisma.JobsUpdateOneWithoutHiredJobsNestedInput
   Users?: Prisma.UsersUpdateOneWithoutHiredJobsNestedInput
 }
@@ -303,6 +318,7 @@ export type HiredJobsUncheckedUpdateInput = {
   hirer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hire_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type HiredJobsCreateManyInput = {
@@ -311,11 +327,13 @@ export type HiredJobsCreateManyInput = {
   hirer_id?: number | null
   hire_date?: Date | string | null
   is_completed?: boolean | null
+  create_date?: Date | string | null
 }
 
 export type HiredJobsUpdateManyMutationInput = {
   hire_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type HiredJobsUncheckedUpdateManyInput = {
@@ -324,6 +342,7 @@ export type HiredJobsUncheckedUpdateManyInput = {
   hirer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hire_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type HiredJobsCountOrderByAggregateInput = {
@@ -332,6 +351,7 @@ export type HiredJobsCountOrderByAggregateInput = {
   hirer_id?: Prisma.SortOrder
   hire_date?: Prisma.SortOrder
   is_completed?: Prisma.SortOrder
+  create_date?: Prisma.SortOrder
 }
 
 export type HiredJobsAvgOrderByAggregateInput = {
@@ -346,6 +366,7 @@ export type HiredJobsMaxOrderByAggregateInput = {
   hirer_id?: Prisma.SortOrder
   hire_date?: Prisma.SortOrder
   is_completed?: Prisma.SortOrder
+  create_date?: Prisma.SortOrder
 }
 
 export type HiredJobsMinOrderByAggregateInput = {
@@ -354,6 +375,7 @@ export type HiredJobsMinOrderByAggregateInput = {
   hirer_id?: Prisma.SortOrder
   hire_date?: Prisma.SortOrder
   is_completed?: Prisma.SortOrder
+  create_date?: Prisma.SortOrder
 }
 
 export type HiredJobsSumOrderByAggregateInput = {
@@ -463,6 +485,7 @@ export type HiredJobsUncheckedUpdateManyWithoutUsersNestedInput = {
 export type HiredJobsCreateWithoutJobsInput = {
   hire_date?: Date | string | null
   is_completed?: boolean | null
+  create_date?: Date | string | null
   Users?: Prisma.UsersCreateNestedOneWithoutHiredJobsInput
 }
 
@@ -471,6 +494,7 @@ export type HiredJobsUncheckedCreateWithoutJobsInput = {
   hirer_id?: number | null
   hire_date?: Date | string | null
   is_completed?: boolean | null
+  create_date?: Date | string | null
 }
 
 export type HiredJobsCreateOrConnectWithoutJobsInput = {
@@ -508,11 +532,13 @@ export type HiredJobsScalarWhereInput = {
   hirer_id?: Prisma.IntNullableFilter<"HiredJobs"> | number | null
   hire_date?: Prisma.DateTimeNullableFilter<"HiredJobs"> | Date | string | null
   is_completed?: Prisma.BoolNullableFilter<"HiredJobs"> | boolean | null
+  create_date?: Prisma.DateTimeNullableFilter<"HiredJobs"> | Date | string | null
 }
 
 export type HiredJobsCreateWithoutUsersInput = {
   hire_date?: Date | string | null
   is_completed?: boolean | null
+  create_date?: Date | string | null
   Jobs?: Prisma.JobsCreateNestedOneWithoutHiredJobsInput
 }
 
@@ -521,6 +547,7 @@ export type HiredJobsUncheckedCreateWithoutUsersInput = {
   job_id?: number | null
   hire_date?: Date | string | null
   is_completed?: boolean | null
+  create_date?: Date | string | null
 }
 
 export type HiredJobsCreateOrConnectWithoutUsersInput = {
@@ -554,11 +581,13 @@ export type HiredJobsCreateManyJobsInput = {
   hirer_id?: number | null
   hire_date?: Date | string | null
   is_completed?: boolean | null
+  create_date?: Date | string | null
 }
 
 export type HiredJobsUpdateWithoutJobsInput = {
   hire_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Users?: Prisma.UsersUpdateOneWithoutHiredJobsNestedInput
 }
 
@@ -567,6 +596,7 @@ export type HiredJobsUncheckedUpdateWithoutJobsInput = {
   hirer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hire_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type HiredJobsUncheckedUpdateManyWithoutJobsInput = {
@@ -574,6 +604,7 @@ export type HiredJobsUncheckedUpdateManyWithoutJobsInput = {
   hirer_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hire_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type HiredJobsCreateManyUsersInput = {
@@ -581,11 +612,13 @@ export type HiredJobsCreateManyUsersInput = {
   job_id?: number | null
   hire_date?: Date | string | null
   is_completed?: boolean | null
+  create_date?: Date | string | null
 }
 
 export type HiredJobsUpdateWithoutUsersInput = {
   hire_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Jobs?: Prisma.JobsUpdateOneWithoutHiredJobsNestedInput
 }
 
@@ -594,6 +627,7 @@ export type HiredJobsUncheckedUpdateWithoutUsersInput = {
   job_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hire_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type HiredJobsUncheckedUpdateManyWithoutUsersInput = {
@@ -601,6 +635,7 @@ export type HiredJobsUncheckedUpdateManyWithoutUsersInput = {
   job_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   hire_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -611,6 +646,7 @@ export type HiredJobsSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   hirer_id?: boolean
   hire_date?: boolean
   is_completed?: boolean
+  create_date?: boolean
   Jobs?: boolean | Prisma.HiredJobs$JobsArgs<ExtArgs>
   Users?: boolean | Prisma.HiredJobs$UsersArgs<ExtArgs>
 }, ExtArgs["result"]["hiredJobs"]>
@@ -623,9 +659,10 @@ export type HiredJobsSelectScalar = {
   hirer_id?: boolean
   hire_date?: boolean
   is_completed?: boolean
+  create_date?: boolean
 }
 
-export type HiredJobsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "job_id" | "hirer_id" | "hire_date" | "is_completed", ExtArgs["result"]["hiredJobs"]>
+export type HiredJobsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "job_id" | "hirer_id" | "hire_date" | "is_completed" | "create_date", ExtArgs["result"]["hiredJobs"]>
 export type HiredJobsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Jobs?: boolean | Prisma.HiredJobs$JobsArgs<ExtArgs>
   Users?: boolean | Prisma.HiredJobs$UsersArgs<ExtArgs>
@@ -643,6 +680,7 @@ export type $HiredJobsPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     hirer_id: number | null
     hire_date: Date | null
     is_completed: boolean | null
+    create_date: Date | null
   }, ExtArgs["result"]["hiredJobs"]>
   composites: {}
 }
@@ -1019,6 +1057,7 @@ export interface HiredJobsFieldRefs {
   readonly hirer_id: Prisma.FieldRef<"HiredJobs", 'Int'>
   readonly hire_date: Prisma.FieldRef<"HiredJobs", 'DateTime'>
   readonly is_completed: Prisma.FieldRef<"HiredJobs", 'Boolean'>
+  readonly create_date: Prisma.FieldRef<"HiredJobs", 'DateTime'>
 }
     
 

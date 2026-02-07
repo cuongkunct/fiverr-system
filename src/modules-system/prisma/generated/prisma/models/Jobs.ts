@@ -55,6 +55,7 @@ export type JobsMinAggregateOutputType = {
   job_stars: number | null
   sub_category_id: number | null
   creator_id: number | null
+  create_date: Date | null
 }
 
 export type JobsMaxAggregateOutputType = {
@@ -68,6 +69,7 @@ export type JobsMaxAggregateOutputType = {
   job_stars: number | null
   sub_category_id: number | null
   creator_id: number | null
+  create_date: Date | null
 }
 
 export type JobsCountAggregateOutputType = {
@@ -81,6 +83,7 @@ export type JobsCountAggregateOutputType = {
   job_stars: number
   sub_category_id: number
   creator_id: number
+  create_date: number
   _all: number
 }
 
@@ -114,6 +117,7 @@ export type JobsMinAggregateInputType = {
   job_stars?: true
   sub_category_id?: true
   creator_id?: true
+  create_date?: true
 }
 
 export type JobsMaxAggregateInputType = {
@@ -127,6 +131,7 @@ export type JobsMaxAggregateInputType = {
   job_stars?: true
   sub_category_id?: true
   creator_id?: true
+  create_date?: true
 }
 
 export type JobsCountAggregateInputType = {
@@ -140,6 +145,7 @@ export type JobsCountAggregateInputType = {
   job_stars?: true
   sub_category_id?: true
   creator_id?: true
+  create_date?: true
   _all?: true
 }
 
@@ -240,6 +246,7 @@ export type JobsGroupByOutputType = {
   job_stars: number | null
   sub_category_id: number | null
   creator_id: number | null
+  create_date: Date | null
   _count: JobsCountAggregateOutputType | null
   _avg: JobsAvgAggregateOutputType | null
   _sum: JobsSumAggregateOutputType | null
@@ -276,6 +283,7 @@ export type JobsWhereInput = {
   job_stars?: Prisma.IntNullableFilter<"Jobs"> | number | null
   sub_category_id?: Prisma.IntNullableFilter<"Jobs"> | number | null
   creator_id?: Prisma.IntNullableFilter<"Jobs"> | number | null
+  create_date?: Prisma.DateTimeNullableFilter<"Jobs"> | Date | string | null
   Comments?: Prisma.CommentsListRelationFilter
   HiredJobs?: Prisma.HiredJobsListRelationFilter
   JobSubCategories?: Prisma.XOR<Prisma.JobSubCategoriesNullableScalarRelationFilter, Prisma.JobSubCategoriesWhereInput> | null
@@ -293,6 +301,7 @@ export type JobsOrderByWithRelationInput = {
   job_stars?: Prisma.SortOrderInput | Prisma.SortOrder
   sub_category_id?: Prisma.SortOrderInput | Prisma.SortOrder
   creator_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  create_date?: Prisma.SortOrderInput | Prisma.SortOrder
   Comments?: Prisma.CommentsOrderByRelationAggregateInput
   HiredJobs?: Prisma.HiredJobsOrderByRelationAggregateInput
   JobSubCategories?: Prisma.JobSubCategoriesOrderByWithRelationInput
@@ -314,6 +323,7 @@ export type JobsWhereUniqueInput = Prisma.AtLeast<{
   job_stars?: Prisma.IntNullableFilter<"Jobs"> | number | null
   sub_category_id?: Prisma.IntNullableFilter<"Jobs"> | number | null
   creator_id?: Prisma.IntNullableFilter<"Jobs"> | number | null
+  create_date?: Prisma.DateTimeNullableFilter<"Jobs"> | Date | string | null
   Comments?: Prisma.CommentsListRelationFilter
   HiredJobs?: Prisma.HiredJobsListRelationFilter
   JobSubCategories?: Prisma.XOR<Prisma.JobSubCategoriesNullableScalarRelationFilter, Prisma.JobSubCategoriesWhereInput> | null
@@ -331,6 +341,7 @@ export type JobsOrderByWithAggregationInput = {
   job_stars?: Prisma.SortOrderInput | Prisma.SortOrder
   sub_category_id?: Prisma.SortOrderInput | Prisma.SortOrder
   creator_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  create_date?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.JobsCountOrderByAggregateInput
   _avg?: Prisma.JobsAvgOrderByAggregateInput
   _max?: Prisma.JobsMaxOrderByAggregateInput
@@ -352,6 +363,7 @@ export type JobsScalarWhereWithAggregatesInput = {
   job_stars?: Prisma.IntNullableWithAggregatesFilter<"Jobs"> | number | null
   sub_category_id?: Prisma.IntNullableWithAggregatesFilter<"Jobs"> | number | null
   creator_id?: Prisma.IntNullableWithAggregatesFilter<"Jobs"> | number | null
+  create_date?: Prisma.DateTimeNullableWithAggregatesFilter<"Jobs"> | Date | string | null
 }
 
 export type JobsCreateInput = {
@@ -362,6 +374,7 @@ export type JobsCreateInput = {
   description?: string | null
   short_description?: string | null
   job_stars?: number | null
+  create_date?: Date | string | null
   Comments?: Prisma.CommentsCreateNestedManyWithoutJobsInput
   HiredJobs?: Prisma.HiredJobsCreateNestedManyWithoutJobsInput
   JobSubCategories?: Prisma.JobSubCategoriesCreateNestedOneWithoutJobsInput
@@ -379,6 +392,7 @@ export type JobsUncheckedCreateInput = {
   job_stars?: number | null
   sub_category_id?: number | null
   creator_id?: number | null
+  create_date?: Date | string | null
   Comments?: Prisma.CommentsUncheckedCreateNestedManyWithoutJobsInput
   HiredJobs?: Prisma.HiredJobsUncheckedCreateNestedManyWithoutJobsInput
 }
@@ -391,6 +405,7 @@ export type JobsUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   short_description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   job_stars?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Comments?: Prisma.CommentsUpdateManyWithoutJobsNestedInput
   HiredJobs?: Prisma.HiredJobsUpdateManyWithoutJobsNestedInput
   JobSubCategories?: Prisma.JobSubCategoriesUpdateOneWithoutJobsNestedInput
@@ -408,6 +423,7 @@ export type JobsUncheckedUpdateInput = {
   job_stars?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   creator_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Comments?: Prisma.CommentsUncheckedUpdateManyWithoutJobsNestedInput
   HiredJobs?: Prisma.HiredJobsUncheckedUpdateManyWithoutJobsNestedInput
 }
@@ -423,6 +439,7 @@ export type JobsCreateManyInput = {
   job_stars?: number | null
   sub_category_id?: number | null
   creator_id?: number | null
+  create_date?: Date | string | null
 }
 
 export type JobsUpdateManyMutationInput = {
@@ -433,6 +450,7 @@ export type JobsUpdateManyMutationInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   short_description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   job_stars?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type JobsUncheckedUpdateManyInput = {
@@ -446,6 +464,7 @@ export type JobsUncheckedUpdateManyInput = {
   job_stars?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   creator_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type JobsNullableScalarRelationFilter = {
@@ -480,6 +499,7 @@ export type JobsCountOrderByAggregateInput = {
   job_stars?: Prisma.SortOrder
   sub_category_id?: Prisma.SortOrder
   creator_id?: Prisma.SortOrder
+  create_date?: Prisma.SortOrder
 }
 
 export type JobsAvgOrderByAggregateInput = {
@@ -502,6 +522,7 @@ export type JobsMaxOrderByAggregateInput = {
   job_stars?: Prisma.SortOrder
   sub_category_id?: Prisma.SortOrder
   creator_id?: Prisma.SortOrder
+  create_date?: Prisma.SortOrder
 }
 
 export type JobsMinOrderByAggregateInput = {
@@ -515,6 +536,7 @@ export type JobsMinOrderByAggregateInput = {
   job_stars?: Prisma.SortOrder
   sub_category_id?: Prisma.SortOrder
   creator_id?: Prisma.SortOrder
+  create_date?: Prisma.SortOrder
 }
 
 export type JobsSumOrderByAggregateInput = {
@@ -650,6 +672,7 @@ export type JobsCreateWithoutCommentsInput = {
   description?: string | null
   short_description?: string | null
   job_stars?: number | null
+  create_date?: Date | string | null
   HiredJobs?: Prisma.HiredJobsCreateNestedManyWithoutJobsInput
   JobSubCategories?: Prisma.JobSubCategoriesCreateNestedOneWithoutJobsInput
   Users?: Prisma.UsersCreateNestedOneWithoutJobsInput
@@ -666,6 +689,7 @@ export type JobsUncheckedCreateWithoutCommentsInput = {
   job_stars?: number | null
   sub_category_id?: number | null
   creator_id?: number | null
+  create_date?: Date | string | null
   HiredJobs?: Prisma.HiredJobsUncheckedCreateNestedManyWithoutJobsInput
 }
 
@@ -693,6 +717,7 @@ export type JobsUpdateWithoutCommentsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   short_description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   job_stars?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   HiredJobs?: Prisma.HiredJobsUpdateManyWithoutJobsNestedInput
   JobSubCategories?: Prisma.JobSubCategoriesUpdateOneWithoutJobsNestedInput
   Users?: Prisma.UsersUpdateOneWithoutJobsNestedInput
@@ -709,6 +734,7 @@ export type JobsUncheckedUpdateWithoutCommentsInput = {
   job_stars?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   creator_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   HiredJobs?: Prisma.HiredJobsUncheckedUpdateManyWithoutJobsNestedInput
 }
 
@@ -720,6 +746,7 @@ export type JobsCreateWithoutHiredJobsInput = {
   description?: string | null
   short_description?: string | null
   job_stars?: number | null
+  create_date?: Date | string | null
   Comments?: Prisma.CommentsCreateNestedManyWithoutJobsInput
   JobSubCategories?: Prisma.JobSubCategoriesCreateNestedOneWithoutJobsInput
   Users?: Prisma.UsersCreateNestedOneWithoutJobsInput
@@ -736,6 +763,7 @@ export type JobsUncheckedCreateWithoutHiredJobsInput = {
   job_stars?: number | null
   sub_category_id?: number | null
   creator_id?: number | null
+  create_date?: Date | string | null
   Comments?: Prisma.CommentsUncheckedCreateNestedManyWithoutJobsInput
 }
 
@@ -763,6 +791,7 @@ export type JobsUpdateWithoutHiredJobsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   short_description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   job_stars?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Comments?: Prisma.CommentsUpdateManyWithoutJobsNestedInput
   JobSubCategories?: Prisma.JobSubCategoriesUpdateOneWithoutJobsNestedInput
   Users?: Prisma.UsersUpdateOneWithoutJobsNestedInput
@@ -779,6 +808,7 @@ export type JobsUncheckedUpdateWithoutHiredJobsInput = {
   job_stars?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   creator_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Comments?: Prisma.CommentsUncheckedUpdateManyWithoutJobsNestedInput
 }
 
@@ -790,6 +820,7 @@ export type JobsCreateWithoutJobSubCategoriesInput = {
   description?: string | null
   short_description?: string | null
   job_stars?: number | null
+  create_date?: Date | string | null
   Comments?: Prisma.CommentsCreateNestedManyWithoutJobsInput
   HiredJobs?: Prisma.HiredJobsCreateNestedManyWithoutJobsInput
   Users?: Prisma.UsersCreateNestedOneWithoutJobsInput
@@ -805,6 +836,7 @@ export type JobsUncheckedCreateWithoutJobSubCategoriesInput = {
   short_description?: string | null
   job_stars?: number | null
   creator_id?: number | null
+  create_date?: Date | string | null
   Comments?: Prisma.CommentsUncheckedCreateNestedManyWithoutJobsInput
   HiredJobs?: Prisma.HiredJobsUncheckedCreateNestedManyWithoutJobsInput
 }
@@ -849,6 +881,7 @@ export type JobsScalarWhereInput = {
   job_stars?: Prisma.IntNullableFilter<"Jobs"> | number | null
   sub_category_id?: Prisma.IntNullableFilter<"Jobs"> | number | null
   creator_id?: Prisma.IntNullableFilter<"Jobs"> | number | null
+  create_date?: Prisma.DateTimeNullableFilter<"Jobs"> | Date | string | null
 }
 
 export type JobsCreateWithoutUsersInput = {
@@ -859,6 +892,7 @@ export type JobsCreateWithoutUsersInput = {
   description?: string | null
   short_description?: string | null
   job_stars?: number | null
+  create_date?: Date | string | null
   Comments?: Prisma.CommentsCreateNestedManyWithoutJobsInput
   HiredJobs?: Prisma.HiredJobsCreateNestedManyWithoutJobsInput
   JobSubCategories?: Prisma.JobSubCategoriesCreateNestedOneWithoutJobsInput
@@ -874,6 +908,7 @@ export type JobsUncheckedCreateWithoutUsersInput = {
   short_description?: string | null
   job_stars?: number | null
   sub_category_id?: number | null
+  create_date?: Date | string | null
   Comments?: Prisma.CommentsUncheckedCreateNestedManyWithoutJobsInput
   HiredJobs?: Prisma.HiredJobsUncheckedCreateNestedManyWithoutJobsInput
 }
@@ -914,6 +949,7 @@ export type JobsCreateManyJobSubCategoriesInput = {
   short_description?: string | null
   job_stars?: number | null
   creator_id?: number | null
+  create_date?: Date | string | null
 }
 
 export type JobsUpdateWithoutJobSubCategoriesInput = {
@@ -924,6 +960,7 @@ export type JobsUpdateWithoutJobSubCategoriesInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   short_description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   job_stars?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Comments?: Prisma.CommentsUpdateManyWithoutJobsNestedInput
   HiredJobs?: Prisma.HiredJobsUpdateManyWithoutJobsNestedInput
   Users?: Prisma.UsersUpdateOneWithoutJobsNestedInput
@@ -939,6 +976,7 @@ export type JobsUncheckedUpdateWithoutJobSubCategoriesInput = {
   short_description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   job_stars?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   creator_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Comments?: Prisma.CommentsUncheckedUpdateManyWithoutJobsNestedInput
   HiredJobs?: Prisma.HiredJobsUncheckedUpdateManyWithoutJobsNestedInput
 }
@@ -953,6 +991,7 @@ export type JobsUncheckedUpdateManyWithoutJobSubCategoriesInput = {
   short_description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   job_stars?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   creator_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type JobsCreateManyUsersInput = {
@@ -965,6 +1004,7 @@ export type JobsCreateManyUsersInput = {
   short_description?: string | null
   job_stars?: number | null
   sub_category_id?: number | null
+  create_date?: Date | string | null
 }
 
 export type JobsUpdateWithoutUsersInput = {
@@ -975,6 +1015,7 @@ export type JobsUpdateWithoutUsersInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   short_description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   job_stars?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Comments?: Prisma.CommentsUpdateManyWithoutJobsNestedInput
   HiredJobs?: Prisma.HiredJobsUpdateManyWithoutJobsNestedInput
   JobSubCategories?: Prisma.JobSubCategoriesUpdateOneWithoutJobsNestedInput
@@ -990,6 +1031,7 @@ export type JobsUncheckedUpdateWithoutUsersInput = {
   short_description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   job_stars?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Comments?: Prisma.CommentsUncheckedUpdateManyWithoutJobsNestedInput
   HiredJobs?: Prisma.HiredJobsUncheckedUpdateManyWithoutJobsNestedInput
 }
@@ -1004,6 +1046,7 @@ export type JobsUncheckedUpdateManyWithoutUsersInput = {
   short_description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   job_stars?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -1057,6 +1100,7 @@ export type JobsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   job_stars?: boolean
   sub_category_id?: boolean
   creator_id?: boolean
+  create_date?: boolean
   Comments?: boolean | Prisma.Jobs$CommentsArgs<ExtArgs>
   HiredJobs?: boolean | Prisma.Jobs$HiredJobsArgs<ExtArgs>
   JobSubCategories?: boolean | Prisma.Jobs$JobSubCategoriesArgs<ExtArgs>
@@ -1077,9 +1121,10 @@ export type JobsSelectScalar = {
   job_stars?: boolean
   sub_category_id?: boolean
   creator_id?: boolean
+  create_date?: boolean
 }
 
-export type JobsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "job_name" | "rating" | "price" | "image" | "description" | "short_description" | "job_stars" | "sub_category_id" | "creator_id", ExtArgs["result"]["jobs"]>
+export type JobsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "job_name" | "rating" | "price" | "image" | "description" | "short_description" | "job_stars" | "sub_category_id" | "creator_id" | "create_date", ExtArgs["result"]["jobs"]>
 export type JobsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Comments?: boolean | Prisma.Jobs$CommentsArgs<ExtArgs>
   HiredJobs?: boolean | Prisma.Jobs$HiredJobsArgs<ExtArgs>
@@ -1107,6 +1152,7 @@ export type $JobsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     job_stars: number | null
     sub_category_id: number | null
     creator_id: number | null
+    create_date: Date | null
   }, ExtArgs["result"]["jobs"]>
   composites: {}
 }
@@ -1490,6 +1536,7 @@ export interface JobsFieldRefs {
   readonly job_stars: Prisma.FieldRef<"Jobs", 'Int'>
   readonly sub_category_id: Prisma.FieldRef<"Jobs", 'Int'>
   readonly creator_id: Prisma.FieldRef<"Jobs", 'Int'>
+  readonly create_date: Prisma.FieldRef<"Jobs", 'DateTime'>
 }
     
 

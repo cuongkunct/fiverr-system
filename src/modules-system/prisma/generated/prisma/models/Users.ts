@@ -45,6 +45,7 @@ export type UsersMinAggregateOutputType = {
   role: string | null
   skill: string | null
   certification: string | null
+  create_date: Date | null
 }
 
 export type UsersMaxAggregateOutputType = {
@@ -58,6 +59,7 @@ export type UsersMaxAggregateOutputType = {
   role: string | null
   skill: string | null
   certification: string | null
+  create_date: Date | null
 }
 
 export type UsersCountAggregateOutputType = {
@@ -71,6 +73,7 @@ export type UsersCountAggregateOutputType = {
   role: number
   skill: number
   certification: number
+  create_date: number
   _all: number
 }
 
@@ -94,6 +97,7 @@ export type UsersMinAggregateInputType = {
   role?: true
   skill?: true
   certification?: true
+  create_date?: true
 }
 
 export type UsersMaxAggregateInputType = {
@@ -107,6 +111,7 @@ export type UsersMaxAggregateInputType = {
   role?: true
   skill?: true
   certification?: true
+  create_date?: true
 }
 
 export type UsersCountAggregateInputType = {
@@ -120,6 +125,7 @@ export type UsersCountAggregateInputType = {
   role?: true
   skill?: true
   certification?: true
+  create_date?: true
   _all?: true
 }
 
@@ -220,6 +226,7 @@ export type UsersGroupByOutputType = {
   role: string
   skill: string | null
   certification: string | null
+  create_date: Date | null
   _count: UsersCountAggregateOutputType | null
   _avg: UsersAvgAggregateOutputType | null
   _sum: UsersSumAggregateOutputType | null
@@ -256,6 +263,7 @@ export type UsersWhereInput = {
   role?: Prisma.StringFilter<"Users"> | string
   skill?: Prisma.StringNullableFilter<"Users"> | string | null
   certification?: Prisma.StringNullableFilter<"Users"> | string | null
+  create_date?: Prisma.DateTimeNullableFilter<"Users"> | Date | string | null
   Comments?: Prisma.CommentsListRelationFilter
   HiredJobs?: Prisma.HiredJobsListRelationFilter
   Jobs?: Prisma.JobsListRelationFilter
@@ -272,6 +280,7 @@ export type UsersOrderByWithRelationInput = {
   role?: Prisma.SortOrder
   skill?: Prisma.SortOrderInput | Prisma.SortOrder
   certification?: Prisma.SortOrderInput | Prisma.SortOrder
+  create_date?: Prisma.SortOrderInput | Prisma.SortOrder
   Comments?: Prisma.CommentsOrderByRelationAggregateInput
   HiredJobs?: Prisma.HiredJobsOrderByRelationAggregateInput
   Jobs?: Prisma.JobsOrderByRelationAggregateInput
@@ -292,6 +301,7 @@ export type UsersWhereUniqueInput = Prisma.AtLeast<{
   role?: Prisma.StringFilter<"Users"> | string
   skill?: Prisma.StringNullableFilter<"Users"> | string | null
   certification?: Prisma.StringNullableFilter<"Users"> | string | null
+  create_date?: Prisma.DateTimeNullableFilter<"Users"> | Date | string | null
   Comments?: Prisma.CommentsListRelationFilter
   HiredJobs?: Prisma.HiredJobsListRelationFilter
   Jobs?: Prisma.JobsListRelationFilter
@@ -308,6 +318,7 @@ export type UsersOrderByWithAggregationInput = {
   role?: Prisma.SortOrder
   skill?: Prisma.SortOrderInput | Prisma.SortOrder
   certification?: Prisma.SortOrderInput | Prisma.SortOrder
+  create_date?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UsersCountOrderByAggregateInput
   _avg?: Prisma.UsersAvgOrderByAggregateInput
   _max?: Prisma.UsersMaxOrderByAggregateInput
@@ -329,6 +340,7 @@ export type UsersScalarWhereWithAggregatesInput = {
   role?: Prisma.StringWithAggregatesFilter<"Users"> | string
   skill?: Prisma.StringNullableWithAggregatesFilter<"Users"> | string | null
   certification?: Prisma.StringNullableWithAggregatesFilter<"Users"> | string | null
+  create_date?: Prisma.DateTimeNullableWithAggregatesFilter<"Users"> | Date | string | null
 }
 
 export type UsersCreateInput = {
@@ -341,6 +353,7 @@ export type UsersCreateInput = {
   role: string
   skill?: string | null
   certification?: string | null
+  create_date?: Date | string | null
   Comments?: Prisma.CommentsCreateNestedManyWithoutUsersInput
   HiredJobs?: Prisma.HiredJobsCreateNestedManyWithoutUsersInput
   Jobs?: Prisma.JobsCreateNestedManyWithoutUsersInput
@@ -357,6 +370,7 @@ export type UsersUncheckedCreateInput = {
   role: string
   skill?: string | null
   certification?: string | null
+  create_date?: Date | string | null
   Comments?: Prisma.CommentsUncheckedCreateNestedManyWithoutUsersInput
   HiredJobs?: Prisma.HiredJobsUncheckedCreateNestedManyWithoutUsersInput
   Jobs?: Prisma.JobsUncheckedCreateNestedManyWithoutUsersInput
@@ -372,6 +386,7 @@ export type UsersUpdateInput = {
   role?: Prisma.StringFieldUpdateOperationsInput | string
   skill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   certification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Comments?: Prisma.CommentsUpdateManyWithoutUsersNestedInput
   HiredJobs?: Prisma.HiredJobsUpdateManyWithoutUsersNestedInput
   Jobs?: Prisma.JobsUpdateManyWithoutUsersNestedInput
@@ -388,6 +403,7 @@ export type UsersUncheckedUpdateInput = {
   role?: Prisma.StringFieldUpdateOperationsInput | string
   skill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   certification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Comments?: Prisma.CommentsUncheckedUpdateManyWithoutUsersNestedInput
   HiredJobs?: Prisma.HiredJobsUncheckedUpdateManyWithoutUsersNestedInput
   Jobs?: Prisma.JobsUncheckedUpdateManyWithoutUsersNestedInput
@@ -404,6 +420,7 @@ export type UsersCreateManyInput = {
   role: string
   skill?: string | null
   certification?: string | null
+  create_date?: Date | string | null
 }
 
 export type UsersUpdateManyMutationInput = {
@@ -416,6 +433,7 @@ export type UsersUpdateManyMutationInput = {
   role?: Prisma.StringFieldUpdateOperationsInput | string
   skill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   certification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type UsersUncheckedUpdateManyInput = {
@@ -429,6 +447,7 @@ export type UsersUncheckedUpdateManyInput = {
   role?: Prisma.StringFieldUpdateOperationsInput | string
   skill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   certification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type UsersNullableScalarRelationFilter = {
@@ -453,6 +472,7 @@ export type UsersCountOrderByAggregateInput = {
   role?: Prisma.SortOrder
   skill?: Prisma.SortOrder
   certification?: Prisma.SortOrder
+  create_date?: Prisma.SortOrder
 }
 
 export type UsersAvgOrderByAggregateInput = {
@@ -470,6 +490,7 @@ export type UsersMaxOrderByAggregateInput = {
   role?: Prisma.SortOrder
   skill?: Prisma.SortOrder
   certification?: Prisma.SortOrder
+  create_date?: Prisma.SortOrder
 }
 
 export type UsersMinOrderByAggregateInput = {
@@ -483,6 +504,7 @@ export type UsersMinOrderByAggregateInput = {
   role?: Prisma.SortOrder
   skill?: Prisma.SortOrder
   certification?: Prisma.SortOrder
+  create_date?: Prisma.SortOrder
 }
 
 export type UsersSumOrderByAggregateInput = {
@@ -547,6 +569,7 @@ export type UsersCreateWithoutCommentsInput = {
   role: string
   skill?: string | null
   certification?: string | null
+  create_date?: Date | string | null
   HiredJobs?: Prisma.HiredJobsCreateNestedManyWithoutUsersInput
   Jobs?: Prisma.JobsCreateNestedManyWithoutUsersInput
 }
@@ -562,6 +585,7 @@ export type UsersUncheckedCreateWithoutCommentsInput = {
   role: string
   skill?: string | null
   certification?: string | null
+  create_date?: Date | string | null
   HiredJobs?: Prisma.HiredJobsUncheckedCreateNestedManyWithoutUsersInput
   Jobs?: Prisma.JobsUncheckedCreateNestedManyWithoutUsersInput
 }
@@ -592,6 +616,7 @@ export type UsersUpdateWithoutCommentsInput = {
   role?: Prisma.StringFieldUpdateOperationsInput | string
   skill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   certification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   HiredJobs?: Prisma.HiredJobsUpdateManyWithoutUsersNestedInput
   Jobs?: Prisma.JobsUpdateManyWithoutUsersNestedInput
 }
@@ -607,6 +632,7 @@ export type UsersUncheckedUpdateWithoutCommentsInput = {
   role?: Prisma.StringFieldUpdateOperationsInput | string
   skill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   certification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   HiredJobs?: Prisma.HiredJobsUncheckedUpdateManyWithoutUsersNestedInput
   Jobs?: Prisma.JobsUncheckedUpdateManyWithoutUsersNestedInput
 }
@@ -621,6 +647,7 @@ export type UsersCreateWithoutHiredJobsInput = {
   role: string
   skill?: string | null
   certification?: string | null
+  create_date?: Date | string | null
   Comments?: Prisma.CommentsCreateNestedManyWithoutUsersInput
   Jobs?: Prisma.JobsCreateNestedManyWithoutUsersInput
 }
@@ -636,6 +663,7 @@ export type UsersUncheckedCreateWithoutHiredJobsInput = {
   role: string
   skill?: string | null
   certification?: string | null
+  create_date?: Date | string | null
   Comments?: Prisma.CommentsUncheckedCreateNestedManyWithoutUsersInput
   Jobs?: Prisma.JobsUncheckedCreateNestedManyWithoutUsersInput
 }
@@ -666,6 +694,7 @@ export type UsersUpdateWithoutHiredJobsInput = {
   role?: Prisma.StringFieldUpdateOperationsInput | string
   skill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   certification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Comments?: Prisma.CommentsUpdateManyWithoutUsersNestedInput
   Jobs?: Prisma.JobsUpdateManyWithoutUsersNestedInput
 }
@@ -681,6 +710,7 @@ export type UsersUncheckedUpdateWithoutHiredJobsInput = {
   role?: Prisma.StringFieldUpdateOperationsInput | string
   skill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   certification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Comments?: Prisma.CommentsUncheckedUpdateManyWithoutUsersNestedInput
   Jobs?: Prisma.JobsUncheckedUpdateManyWithoutUsersNestedInput
 }
@@ -695,6 +725,7 @@ export type UsersCreateWithoutJobsInput = {
   role: string
   skill?: string | null
   certification?: string | null
+  create_date?: Date | string | null
   Comments?: Prisma.CommentsCreateNestedManyWithoutUsersInput
   HiredJobs?: Prisma.HiredJobsCreateNestedManyWithoutUsersInput
 }
@@ -710,6 +741,7 @@ export type UsersUncheckedCreateWithoutJobsInput = {
   role: string
   skill?: string | null
   certification?: string | null
+  create_date?: Date | string | null
   Comments?: Prisma.CommentsUncheckedCreateNestedManyWithoutUsersInput
   HiredJobs?: Prisma.HiredJobsUncheckedCreateNestedManyWithoutUsersInput
 }
@@ -740,6 +772,7 @@ export type UsersUpdateWithoutJobsInput = {
   role?: Prisma.StringFieldUpdateOperationsInput | string
   skill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   certification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Comments?: Prisma.CommentsUpdateManyWithoutUsersNestedInput
   HiredJobs?: Prisma.HiredJobsUpdateManyWithoutUsersNestedInput
 }
@@ -755,6 +788,7 @@ export type UsersUncheckedUpdateWithoutJobsInput = {
   role?: Prisma.StringFieldUpdateOperationsInput | string
   skill?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   certification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Comments?: Prisma.CommentsUncheckedUpdateManyWithoutUsersNestedInput
   HiredJobs?: Prisma.HiredJobsUncheckedUpdateManyWithoutUsersNestedInput
 }
@@ -819,6 +853,7 @@ export type UsersSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   role?: boolean
   skill?: boolean
   certification?: boolean
+  create_date?: boolean
   Comments?: boolean | Prisma.Users$CommentsArgs<ExtArgs>
   HiredJobs?: boolean | Prisma.Users$HiredJobsArgs<ExtArgs>
   Jobs?: boolean | Prisma.Users$JobsArgs<ExtArgs>
@@ -838,9 +873,10 @@ export type UsersSelectScalar = {
   role?: boolean
   skill?: boolean
   certification?: boolean
+  create_date?: boolean
 }
 
-export type UsersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "password" | "phone" | "birth_day" | "gender" | "role" | "skill" | "certification", ExtArgs["result"]["users"]>
+export type UsersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "password" | "phone" | "birth_day" | "gender" | "role" | "skill" | "certification" | "create_date", ExtArgs["result"]["users"]>
 export type UsersInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Comments?: boolean | Prisma.Users$CommentsArgs<ExtArgs>
   HiredJobs?: boolean | Prisma.Users$HiredJobsArgs<ExtArgs>
@@ -866,6 +902,7 @@ export type $UsersPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     role: string
     skill: string | null
     certification: string | null
+    create_date: Date | null
   }, ExtArgs["result"]["users"]>
   composites: {}
 }
@@ -1248,6 +1285,7 @@ export interface UsersFieldRefs {
   readonly role: Prisma.FieldRef<"Users", 'String'>
   readonly skill: Prisma.FieldRef<"Users", 'String'>
   readonly certification: Prisma.FieldRef<"Users", 'String'>
+  readonly create_date: Prisma.FieldRef<"Users", 'DateTime'>
 }
     
 

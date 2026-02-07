@@ -850,7 +850,8 @@ export const CommentsScalarFieldEnum = {
   user_id: 'user_id',
   comment_date: 'comment_date',
   content: 'content',
-  rating_stars: 'rating_stars'
+  rating_stars: 'rating_stars',
+  create_date: 'create_date'
 } as const
 
 export type CommentsScalarFieldEnum = (typeof CommentsScalarFieldEnum)[keyof typeof CommentsScalarFieldEnum]
@@ -861,7 +862,8 @@ export const HiredJobsScalarFieldEnum = {
   job_id: 'job_id',
   hirer_id: 'hirer_id',
   hire_date: 'hire_date',
-  is_completed: 'is_completed'
+  is_completed: 'is_completed',
+  create_date: 'create_date'
 } as const
 
 export type HiredJobsScalarFieldEnum = (typeof HiredJobsScalarFieldEnum)[keyof typeof HiredJobsScalarFieldEnum]
@@ -869,7 +871,8 @@ export type HiredJobsScalarFieldEnum = (typeof HiredJobsScalarFieldEnum)[keyof t
 
 export const JobCategoriesScalarFieldEnum = {
   id: 'id',
-  category_name: 'category_name'
+  category_name: 'category_name',
+  create_date: 'create_date'
 } as const
 
 export type JobCategoriesScalarFieldEnum = (typeof JobCategoriesScalarFieldEnum)[keyof typeof JobCategoriesScalarFieldEnum]
@@ -879,7 +882,8 @@ export const JobSubCategoriesScalarFieldEnum = {
   id: 'id',
   sub_category_name: 'sub_category_name',
   image: 'image',
-  category_id: 'category_id'
+  category_id: 'category_id',
+  create_date: 'create_date'
 } as const
 
 export type JobSubCategoriesScalarFieldEnum = (typeof JobSubCategoriesScalarFieldEnum)[keyof typeof JobSubCategoriesScalarFieldEnum]
@@ -895,7 +899,8 @@ export const JobsScalarFieldEnum = {
   short_description: 'short_description',
   job_stars: 'job_stars',
   sub_category_id: 'sub_category_id',
-  creator_id: 'creator_id'
+  creator_id: 'creator_id',
+  create_date: 'create_date'
 } as const
 
 export type JobsScalarFieldEnum = (typeof JobsScalarFieldEnum)[keyof typeof JobsScalarFieldEnum]
@@ -911,7 +916,8 @@ export const UsersScalarFieldEnum = {
   gender: 'gender',
   role: 'role',
   skill: 'skill',
-  certification: 'certification'
+  certification: 'certification',
+  create_date: 'create_date'
 } as const
 
 export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof UsersScalarFieldEnum]

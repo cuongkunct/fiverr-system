@@ -47,6 +47,7 @@ export type CommentsMinAggregateOutputType = {
   comment_date: Date | null
   content: string | null
   rating_stars: number | null
+  create_date: Date | null
 }
 
 export type CommentsMaxAggregateOutputType = {
@@ -56,6 +57,7 @@ export type CommentsMaxAggregateOutputType = {
   comment_date: Date | null
   content: string | null
   rating_stars: number | null
+  create_date: Date | null
 }
 
 export type CommentsCountAggregateOutputType = {
@@ -65,6 +67,7 @@ export type CommentsCountAggregateOutputType = {
   comment_date: number
   content: number
   rating_stars: number
+  create_date: number
   _all: number
 }
 
@@ -90,6 +93,7 @@ export type CommentsMinAggregateInputType = {
   comment_date?: true
   content?: true
   rating_stars?: true
+  create_date?: true
 }
 
 export type CommentsMaxAggregateInputType = {
@@ -99,6 +103,7 @@ export type CommentsMaxAggregateInputType = {
   comment_date?: true
   content?: true
   rating_stars?: true
+  create_date?: true
 }
 
 export type CommentsCountAggregateInputType = {
@@ -108,6 +113,7 @@ export type CommentsCountAggregateInputType = {
   comment_date?: true
   content?: true
   rating_stars?: true
+  create_date?: true
   _all?: true
 }
 
@@ -204,6 +210,7 @@ export type CommentsGroupByOutputType = {
   comment_date: Date | null
   content: string | null
   rating_stars: number | null
+  create_date: Date | null
   _count: CommentsCountAggregateOutputType | null
   _avg: CommentsAvgAggregateOutputType | null
   _sum: CommentsSumAggregateOutputType | null
@@ -236,6 +243,7 @@ export type CommentsWhereInput = {
   comment_date?: Prisma.DateTimeNullableFilter<"Comments"> | Date | string | null
   content?: Prisma.StringNullableFilter<"Comments"> | string | null
   rating_stars?: Prisma.IntNullableFilter<"Comments"> | number | null
+  create_date?: Prisma.DateTimeNullableFilter<"Comments"> | Date | string | null
   Jobs?: Prisma.XOR<Prisma.JobsNullableScalarRelationFilter, Prisma.JobsWhereInput> | null
   Users?: Prisma.XOR<Prisma.UsersNullableScalarRelationFilter, Prisma.UsersWhereInput> | null
 }
@@ -247,6 +255,7 @@ export type CommentsOrderByWithRelationInput = {
   comment_date?: Prisma.SortOrderInput | Prisma.SortOrder
   content?: Prisma.SortOrderInput | Prisma.SortOrder
   rating_stars?: Prisma.SortOrderInput | Prisma.SortOrder
+  create_date?: Prisma.SortOrderInput | Prisma.SortOrder
   Jobs?: Prisma.JobsOrderByWithRelationInput
   Users?: Prisma.UsersOrderByWithRelationInput
   _relevance?: Prisma.CommentsOrderByRelevanceInput
@@ -262,6 +271,7 @@ export type CommentsWhereUniqueInput = Prisma.AtLeast<{
   comment_date?: Prisma.DateTimeNullableFilter<"Comments"> | Date | string | null
   content?: Prisma.StringNullableFilter<"Comments"> | string | null
   rating_stars?: Prisma.IntNullableFilter<"Comments"> | number | null
+  create_date?: Prisma.DateTimeNullableFilter<"Comments"> | Date | string | null
   Jobs?: Prisma.XOR<Prisma.JobsNullableScalarRelationFilter, Prisma.JobsWhereInput> | null
   Users?: Prisma.XOR<Prisma.UsersNullableScalarRelationFilter, Prisma.UsersWhereInput> | null
 }, "id">
@@ -273,6 +283,7 @@ export type CommentsOrderByWithAggregationInput = {
   comment_date?: Prisma.SortOrderInput | Prisma.SortOrder
   content?: Prisma.SortOrderInput | Prisma.SortOrder
   rating_stars?: Prisma.SortOrderInput | Prisma.SortOrder
+  create_date?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.CommentsCountOrderByAggregateInput
   _avg?: Prisma.CommentsAvgOrderByAggregateInput
   _max?: Prisma.CommentsMaxOrderByAggregateInput
@@ -290,12 +301,14 @@ export type CommentsScalarWhereWithAggregatesInput = {
   comment_date?: Prisma.DateTimeNullableWithAggregatesFilter<"Comments"> | Date | string | null
   content?: Prisma.StringNullableWithAggregatesFilter<"Comments"> | string | null
   rating_stars?: Prisma.IntNullableWithAggregatesFilter<"Comments"> | number | null
+  create_date?: Prisma.DateTimeNullableWithAggregatesFilter<"Comments"> | Date | string | null
 }
 
 export type CommentsCreateInput = {
   comment_date?: Date | string | null
   content?: string | null
   rating_stars?: number | null
+  create_date?: Date | string | null
   Jobs?: Prisma.JobsCreateNestedOneWithoutCommentsInput
   Users?: Prisma.UsersCreateNestedOneWithoutCommentsInput
 }
@@ -307,12 +320,14 @@ export type CommentsUncheckedCreateInput = {
   comment_date?: Date | string | null
   content?: string | null
   rating_stars?: number | null
+  create_date?: Date | string | null
 }
 
 export type CommentsUpdateInput = {
   comment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rating_stars?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Jobs?: Prisma.JobsUpdateOneWithoutCommentsNestedInput
   Users?: Prisma.UsersUpdateOneWithoutCommentsNestedInput
 }
@@ -324,6 +339,7 @@ export type CommentsUncheckedUpdateInput = {
   comment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rating_stars?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type CommentsCreateManyInput = {
@@ -333,12 +349,14 @@ export type CommentsCreateManyInput = {
   comment_date?: Date | string | null
   content?: string | null
   rating_stars?: number | null
+  create_date?: Date | string | null
 }
 
 export type CommentsUpdateManyMutationInput = {
   comment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rating_stars?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type CommentsUncheckedUpdateManyInput = {
@@ -348,6 +366,7 @@ export type CommentsUncheckedUpdateManyInput = {
   comment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rating_stars?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type CommentsOrderByRelevanceInput = {
@@ -363,6 +382,7 @@ export type CommentsCountOrderByAggregateInput = {
   comment_date?: Prisma.SortOrder
   content?: Prisma.SortOrder
   rating_stars?: Prisma.SortOrder
+  create_date?: Prisma.SortOrder
 }
 
 export type CommentsAvgOrderByAggregateInput = {
@@ -379,6 +399,7 @@ export type CommentsMaxOrderByAggregateInput = {
   comment_date?: Prisma.SortOrder
   content?: Prisma.SortOrder
   rating_stars?: Prisma.SortOrder
+  create_date?: Prisma.SortOrder
 }
 
 export type CommentsMinOrderByAggregateInput = {
@@ -388,6 +409,7 @@ export type CommentsMinOrderByAggregateInput = {
   comment_date?: Prisma.SortOrder
   content?: Prisma.SortOrder
   rating_stars?: Prisma.SortOrder
+  create_date?: Prisma.SortOrder
 }
 
 export type CommentsSumOrderByAggregateInput = {
@@ -519,6 +541,7 @@ export type CommentsCreateWithoutJobsInput = {
   comment_date?: Date | string | null
   content?: string | null
   rating_stars?: number | null
+  create_date?: Date | string | null
   Users?: Prisma.UsersCreateNestedOneWithoutCommentsInput
 }
 
@@ -528,6 +551,7 @@ export type CommentsUncheckedCreateWithoutJobsInput = {
   comment_date?: Date | string | null
   content?: string | null
   rating_stars?: number | null
+  create_date?: Date | string | null
 }
 
 export type CommentsCreateOrConnectWithoutJobsInput = {
@@ -566,12 +590,14 @@ export type CommentsScalarWhereInput = {
   comment_date?: Prisma.DateTimeNullableFilter<"Comments"> | Date | string | null
   content?: Prisma.StringNullableFilter<"Comments"> | string | null
   rating_stars?: Prisma.IntNullableFilter<"Comments"> | number | null
+  create_date?: Prisma.DateTimeNullableFilter<"Comments"> | Date | string | null
 }
 
 export type CommentsCreateWithoutUsersInput = {
   comment_date?: Date | string | null
   content?: string | null
   rating_stars?: number | null
+  create_date?: Date | string | null
   Jobs?: Prisma.JobsCreateNestedOneWithoutCommentsInput
 }
 
@@ -581,6 +607,7 @@ export type CommentsUncheckedCreateWithoutUsersInput = {
   comment_date?: Date | string | null
   content?: string | null
   rating_stars?: number | null
+  create_date?: Date | string | null
 }
 
 export type CommentsCreateOrConnectWithoutUsersInput = {
@@ -615,12 +642,14 @@ export type CommentsCreateManyJobsInput = {
   comment_date?: Date | string | null
   content?: string | null
   rating_stars?: number | null
+  create_date?: Date | string | null
 }
 
 export type CommentsUpdateWithoutJobsInput = {
   comment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rating_stars?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Users?: Prisma.UsersUpdateOneWithoutCommentsNestedInput
 }
 
@@ -630,6 +659,7 @@ export type CommentsUncheckedUpdateWithoutJobsInput = {
   comment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rating_stars?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type CommentsUncheckedUpdateManyWithoutJobsInput = {
@@ -638,6 +668,7 @@ export type CommentsUncheckedUpdateManyWithoutJobsInput = {
   comment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rating_stars?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type CommentsCreateManyUsersInput = {
@@ -646,12 +677,14 @@ export type CommentsCreateManyUsersInput = {
   comment_date?: Date | string | null
   content?: string | null
   rating_stars?: number | null
+  create_date?: Date | string | null
 }
 
 export type CommentsUpdateWithoutUsersInput = {
   comment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rating_stars?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Jobs?: Prisma.JobsUpdateOneWithoutCommentsNestedInput
 }
 
@@ -661,6 +694,7 @@ export type CommentsUncheckedUpdateWithoutUsersInput = {
   comment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rating_stars?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type CommentsUncheckedUpdateManyWithoutUsersInput = {
@@ -669,6 +703,7 @@ export type CommentsUncheckedUpdateManyWithoutUsersInput = {
   comment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rating_stars?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -680,6 +715,7 @@ export type CommentsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   comment_date?: boolean
   content?: boolean
   rating_stars?: boolean
+  create_date?: boolean
   Jobs?: boolean | Prisma.Comments$JobsArgs<ExtArgs>
   Users?: boolean | Prisma.Comments$UsersArgs<ExtArgs>
 }, ExtArgs["result"]["comments"]>
@@ -693,9 +729,10 @@ export type CommentsSelectScalar = {
   comment_date?: boolean
   content?: boolean
   rating_stars?: boolean
+  create_date?: boolean
 }
 
-export type CommentsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "job_id" | "user_id" | "comment_date" | "content" | "rating_stars", ExtArgs["result"]["comments"]>
+export type CommentsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "job_id" | "user_id" | "comment_date" | "content" | "rating_stars" | "create_date", ExtArgs["result"]["comments"]>
 export type CommentsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Jobs?: boolean | Prisma.Comments$JobsArgs<ExtArgs>
   Users?: boolean | Prisma.Comments$UsersArgs<ExtArgs>
@@ -714,6 +751,7 @@ export type $CommentsPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     comment_date: Date | null
     content: string | null
     rating_stars: number | null
+    create_date: Date | null
   }, ExtArgs["result"]["comments"]>
   composites: {}
 }
@@ -1091,6 +1129,7 @@ export interface CommentsFieldRefs {
   readonly comment_date: Prisma.FieldRef<"Comments", 'DateTime'>
   readonly content: Prisma.FieldRef<"Comments", 'String'>
   readonly rating_stars: Prisma.FieldRef<"Comments", 'Int'>
+  readonly create_date: Prisma.FieldRef<"Comments", 'DateTime'>
 }
     
 

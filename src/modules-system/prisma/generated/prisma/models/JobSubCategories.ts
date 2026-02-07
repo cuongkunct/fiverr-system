@@ -41,6 +41,7 @@ export type JobSubCategoriesMinAggregateOutputType = {
   sub_category_name: string | null
   image: string | null
   category_id: number | null
+  create_date: Date | null
 }
 
 export type JobSubCategoriesMaxAggregateOutputType = {
@@ -48,6 +49,7 @@ export type JobSubCategoriesMaxAggregateOutputType = {
   sub_category_name: string | null
   image: string | null
   category_id: number | null
+  create_date: Date | null
 }
 
 export type JobSubCategoriesCountAggregateOutputType = {
@@ -55,6 +57,7 @@ export type JobSubCategoriesCountAggregateOutputType = {
   sub_category_name: number
   image: number
   category_id: number
+  create_date: number
   _all: number
 }
 
@@ -74,6 +77,7 @@ export type JobSubCategoriesMinAggregateInputType = {
   sub_category_name?: true
   image?: true
   category_id?: true
+  create_date?: true
 }
 
 export type JobSubCategoriesMaxAggregateInputType = {
@@ -81,6 +85,7 @@ export type JobSubCategoriesMaxAggregateInputType = {
   sub_category_name?: true
   image?: true
   category_id?: true
+  create_date?: true
 }
 
 export type JobSubCategoriesCountAggregateInputType = {
@@ -88,6 +93,7 @@ export type JobSubCategoriesCountAggregateInputType = {
   sub_category_name?: true
   image?: true
   category_id?: true
+  create_date?: true
   _all?: true
 }
 
@@ -182,6 +188,7 @@ export type JobSubCategoriesGroupByOutputType = {
   sub_category_name: string
   image: string | null
   category_id: number | null
+  create_date: Date | null
   _count: JobSubCategoriesCountAggregateOutputType | null
   _avg: JobSubCategoriesAvgAggregateOutputType | null
   _sum: JobSubCategoriesSumAggregateOutputType | null
@@ -212,6 +219,7 @@ export type JobSubCategoriesWhereInput = {
   sub_category_name?: Prisma.StringFilter<"JobSubCategories"> | string
   image?: Prisma.StringNullableFilter<"JobSubCategories"> | string | null
   category_id?: Prisma.IntNullableFilter<"JobSubCategories"> | number | null
+  create_date?: Prisma.DateTimeNullableFilter<"JobSubCategories"> | Date | string | null
   JobCategories?: Prisma.XOR<Prisma.JobCategoriesNullableScalarRelationFilter, Prisma.JobCategoriesWhereInput> | null
   Jobs?: Prisma.JobsListRelationFilter
 }
@@ -221,6 +229,7 @@ export type JobSubCategoriesOrderByWithRelationInput = {
   sub_category_name?: Prisma.SortOrder
   image?: Prisma.SortOrderInput | Prisma.SortOrder
   category_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  create_date?: Prisma.SortOrderInput | Prisma.SortOrder
   JobCategories?: Prisma.JobCategoriesOrderByWithRelationInput
   Jobs?: Prisma.JobsOrderByRelationAggregateInput
   _relevance?: Prisma.JobSubCategoriesOrderByRelevanceInput
@@ -234,6 +243,7 @@ export type JobSubCategoriesWhereUniqueInput = Prisma.AtLeast<{
   sub_category_name?: Prisma.StringFilter<"JobSubCategories"> | string
   image?: Prisma.StringNullableFilter<"JobSubCategories"> | string | null
   category_id?: Prisma.IntNullableFilter<"JobSubCategories"> | number | null
+  create_date?: Prisma.DateTimeNullableFilter<"JobSubCategories"> | Date | string | null
   JobCategories?: Prisma.XOR<Prisma.JobCategoriesNullableScalarRelationFilter, Prisma.JobCategoriesWhereInput> | null
   Jobs?: Prisma.JobsListRelationFilter
 }, "id">
@@ -243,6 +253,7 @@ export type JobSubCategoriesOrderByWithAggregationInput = {
   sub_category_name?: Prisma.SortOrder
   image?: Prisma.SortOrderInput | Prisma.SortOrder
   category_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  create_date?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.JobSubCategoriesCountOrderByAggregateInput
   _avg?: Prisma.JobSubCategoriesAvgOrderByAggregateInput
   _max?: Prisma.JobSubCategoriesMaxOrderByAggregateInput
@@ -258,11 +269,13 @@ export type JobSubCategoriesScalarWhereWithAggregatesInput = {
   sub_category_name?: Prisma.StringWithAggregatesFilter<"JobSubCategories"> | string
   image?: Prisma.StringNullableWithAggregatesFilter<"JobSubCategories"> | string | null
   category_id?: Prisma.IntNullableWithAggregatesFilter<"JobSubCategories"> | number | null
+  create_date?: Prisma.DateTimeNullableWithAggregatesFilter<"JobSubCategories"> | Date | string | null
 }
 
 export type JobSubCategoriesCreateInput = {
   sub_category_name: string
   image?: string | null
+  create_date?: Date | string | null
   JobCategories?: Prisma.JobCategoriesCreateNestedOneWithoutJobSubCategoriesInput
   Jobs?: Prisma.JobsCreateNestedManyWithoutJobSubCategoriesInput
 }
@@ -272,12 +285,14 @@ export type JobSubCategoriesUncheckedCreateInput = {
   sub_category_name: string
   image?: string | null
   category_id?: number | null
+  create_date?: Date | string | null
   Jobs?: Prisma.JobsUncheckedCreateNestedManyWithoutJobSubCategoriesInput
 }
 
 export type JobSubCategoriesUpdateInput = {
   sub_category_name?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   JobCategories?: Prisma.JobCategoriesUpdateOneWithoutJobSubCategoriesNestedInput
   Jobs?: Prisma.JobsUpdateManyWithoutJobSubCategoriesNestedInput
 }
@@ -287,6 +302,7 @@ export type JobSubCategoriesUncheckedUpdateInput = {
   sub_category_name?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Jobs?: Prisma.JobsUncheckedUpdateManyWithoutJobSubCategoriesNestedInput
 }
 
@@ -295,11 +311,13 @@ export type JobSubCategoriesCreateManyInput = {
   sub_category_name: string
   image?: string | null
   category_id?: number | null
+  create_date?: Date | string | null
 }
 
 export type JobSubCategoriesUpdateManyMutationInput = {
   sub_category_name?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type JobSubCategoriesUncheckedUpdateManyInput = {
@@ -307,6 +325,7 @@ export type JobSubCategoriesUncheckedUpdateManyInput = {
   sub_category_name?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type JobSubCategoriesListRelationFilter = {
@@ -330,6 +349,7 @@ export type JobSubCategoriesCountOrderByAggregateInput = {
   sub_category_name?: Prisma.SortOrder
   image?: Prisma.SortOrder
   category_id?: Prisma.SortOrder
+  create_date?: Prisma.SortOrder
 }
 
 export type JobSubCategoriesAvgOrderByAggregateInput = {
@@ -342,6 +362,7 @@ export type JobSubCategoriesMaxOrderByAggregateInput = {
   sub_category_name?: Prisma.SortOrder
   image?: Prisma.SortOrder
   category_id?: Prisma.SortOrder
+  create_date?: Prisma.SortOrder
 }
 
 export type JobSubCategoriesMinOrderByAggregateInput = {
@@ -349,6 +370,7 @@ export type JobSubCategoriesMinOrderByAggregateInput = {
   sub_category_name?: Prisma.SortOrder
   image?: Prisma.SortOrder
   category_id?: Prisma.SortOrder
+  create_date?: Prisma.SortOrder
 }
 
 export type JobSubCategoriesSumOrderByAggregateInput = {
@@ -422,6 +444,7 @@ export type JobSubCategoriesUpdateOneWithoutJobsNestedInput = {
 export type JobSubCategoriesCreateWithoutJobCategoriesInput = {
   sub_category_name: string
   image?: string | null
+  create_date?: Date | string | null
   Jobs?: Prisma.JobsCreateNestedManyWithoutJobSubCategoriesInput
 }
 
@@ -429,6 +452,7 @@ export type JobSubCategoriesUncheckedCreateWithoutJobCategoriesInput = {
   id?: number
   sub_category_name: string
   image?: string | null
+  create_date?: Date | string | null
   Jobs?: Prisma.JobsUncheckedCreateNestedManyWithoutJobSubCategoriesInput
 }
 
@@ -466,11 +490,13 @@ export type JobSubCategoriesScalarWhereInput = {
   sub_category_name?: Prisma.StringFilter<"JobSubCategories"> | string
   image?: Prisma.StringNullableFilter<"JobSubCategories"> | string | null
   category_id?: Prisma.IntNullableFilter<"JobSubCategories"> | number | null
+  create_date?: Prisma.DateTimeNullableFilter<"JobSubCategories"> | Date | string | null
 }
 
 export type JobSubCategoriesCreateWithoutJobsInput = {
   sub_category_name: string
   image?: string | null
+  create_date?: Date | string | null
   JobCategories?: Prisma.JobCategoriesCreateNestedOneWithoutJobSubCategoriesInput
 }
 
@@ -479,6 +505,7 @@ export type JobSubCategoriesUncheckedCreateWithoutJobsInput = {
   sub_category_name: string
   image?: string | null
   category_id?: number | null
+  create_date?: Date | string | null
 }
 
 export type JobSubCategoriesCreateOrConnectWithoutJobsInput = {
@@ -500,6 +527,7 @@ export type JobSubCategoriesUpdateToOneWithWhereWithoutJobsInput = {
 export type JobSubCategoriesUpdateWithoutJobsInput = {
   sub_category_name?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   JobCategories?: Prisma.JobCategoriesUpdateOneWithoutJobSubCategoriesNestedInput
 }
 
@@ -508,17 +536,20 @@ export type JobSubCategoriesUncheckedUpdateWithoutJobsInput = {
   sub_category_name?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type JobSubCategoriesCreateManyJobCategoriesInput = {
   id?: number
   sub_category_name: string
   image?: string | null
+  create_date?: Date | string | null
 }
 
 export type JobSubCategoriesUpdateWithoutJobCategoriesInput = {
   sub_category_name?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Jobs?: Prisma.JobsUpdateManyWithoutJobSubCategoriesNestedInput
 }
 
@@ -526,6 +557,7 @@ export type JobSubCategoriesUncheckedUpdateWithoutJobCategoriesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   sub_category_name?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   Jobs?: Prisma.JobsUncheckedUpdateManyWithoutJobSubCategoriesNestedInput
 }
 
@@ -533,6 +565,7 @@ export type JobSubCategoriesUncheckedUpdateManyWithoutJobCategoriesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   sub_category_name?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  create_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -571,6 +604,7 @@ export type JobSubCategoriesSelect<ExtArgs extends runtime.Types.Extensions.Inte
   sub_category_name?: boolean
   image?: boolean
   category_id?: boolean
+  create_date?: boolean
   JobCategories?: boolean | Prisma.JobSubCategories$JobCategoriesArgs<ExtArgs>
   Jobs?: boolean | Prisma.JobSubCategories$JobsArgs<ExtArgs>
   _count?: boolean | Prisma.JobSubCategoriesCountOutputTypeDefaultArgs<ExtArgs>
@@ -583,9 +617,10 @@ export type JobSubCategoriesSelectScalar = {
   sub_category_name?: boolean
   image?: boolean
   category_id?: boolean
+  create_date?: boolean
 }
 
-export type JobSubCategoriesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "sub_category_name" | "image" | "category_id", ExtArgs["result"]["jobSubCategories"]>
+export type JobSubCategoriesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "sub_category_name" | "image" | "category_id" | "create_date", ExtArgs["result"]["jobSubCategories"]>
 export type JobSubCategoriesInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   JobCategories?: boolean | Prisma.JobSubCategories$JobCategoriesArgs<ExtArgs>
   Jobs?: boolean | Prisma.JobSubCategories$JobsArgs<ExtArgs>
@@ -603,6 +638,7 @@ export type $JobSubCategoriesPayload<ExtArgs extends runtime.Types.Extensions.In
     sub_category_name: string
     image: string | null
     category_id: number | null
+    create_date: Date | null
   }, ExtArgs["result"]["jobSubCategories"]>
   composites: {}
 }
@@ -978,6 +1014,7 @@ export interface JobSubCategoriesFieldRefs {
   readonly sub_category_name: Prisma.FieldRef<"JobSubCategories", 'String'>
   readonly image: Prisma.FieldRef<"JobSubCategories", 'String'>
   readonly category_id: Prisma.FieldRef<"JobSubCategories", 'Int'>
+  readonly create_date: Prisma.FieldRef<"JobSubCategories", 'DateTime'>
 }
     
 

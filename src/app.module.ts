@@ -8,10 +8,13 @@ import { CategoryModule } from './modules-api/category/category.module';
 import { BookingModule } from './modules-api/booking/booking.module';
 import { CommentModule } from './modules-api/comment/comment.module';
 import { PrismaModule } from './modules-system/prisma/prisma.module';
+import { TokenModule } from './modules-system/token/token.module';
+import { APP_GUARD } from '@nestjs/core';
+import { ProtectGuard } from './common/guards/protect.guard';
 
 @Module({
-  imports: [PrismaModule, AuthModule, UserModule, JobModule, CategoryModule, BookingModule, CommentModule],
+  imports: [PrismaModule, AuthModule, UserModule, JobModule, CategoryModule, BookingModule, CommentModule, TokenModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, { provide: APP_GUARD, useClass: ProtectGuard }],
 })
 export class AppModule { }

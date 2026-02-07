@@ -1,20 +1,27 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { JobService } from './job.service';
 import { CreateJobDto } from './dto/create-job.dto';
 import { UpdateJobDto } from './dto/update-job.dto';
+import { QueryJobPaginationDto } from './dto/search-job.dto';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @Controller('job')
+@ApiTags('Jobs')
 export class JobController {
-  constructor(private readonly jobService: JobService) {}
+  constructor(private readonly jobService: JobService) { }
 
   @Post()
-  create(@Body() createJobDto: CreateJobDto) {
-    return this.jobService.create(createJobDto);
+  @ApiOperation({ summary: 'Create new job' })
+  @ApiResponse({ status: 200, description: 'Create new job success' })
+  create(@Body() body: CreateJobDto) {
+    return this.jobService.create(body);
   }
 
   @Get()
-  findAll() {
-    return this.jobService.findAll();
+  @ApiOperation({ summary: 'Get all jobs' })
+  @ApiResponse({ status: 200, description: 'Get all jobs success' })
+  findAll(@Query() query: QueryJobPaginationDto) {
+    return this.jobService.findAll(query);
   }
 
   @Get(':id')

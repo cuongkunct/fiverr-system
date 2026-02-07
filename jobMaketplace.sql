@@ -26,10 +26,16 @@ CREATE TABLE Users (
     phone VARCHAR(20),
     birth_day DATE,
     gender VARCHAR(10),
-    role VARCHAR(50), -- Admin, Client, Freelancer
+    role VARCHAR(50) NOT NULL, -- Admin, Client, Freelancer
     skill TEXT,
     certification TEXT
+    refresh_token VARCHAR(255)
+    lastLoginAt DATETIME
+    create_date DATETIME DEFAULT CURRENT_TIMESTAMP 
 );
+
+ALTER TABLE Users
+MODIFY role VARCHAR(50) NOT NULL;
 
 -- 4. Jobs
 CREATE TABLE Jobs (
@@ -43,9 +49,12 @@ CREATE TABLE Jobs (
     job_stars INT DEFAULT 0,
     sub_category_id INT,
     creator_id INT,
+    create_date DATETIME DEFAULT CURRENT_TIMESTAMP 
     FOREIGN KEY (sub_category_id) REFERENCES JobSubCategories(id),
     FOREIGN KEY (creator_id) REFERENCES Users(id)
 );
+ALTER TABLE Comments 
+ADD COLUMN create_date DATETIME DEFAULT CURRENT_TIMESTAMP;
 
 -- 5. Hired Jobs (ThueCongViec)
 CREATE TABLE HiredJobs (
@@ -54,6 +63,7 @@ CREATE TABLE HiredJobs (
     hirer_id INT,
     hire_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     is_completed BOOLEAN DEFAULT FALSE,
+    create_date DATETIME DEFAULT CURRENT_TIMESTAMP 
     FOREIGN KEY (job_id) REFERENCES Jobs(id),
     FOREIGN KEY (hirer_id) REFERENCES Users(id)
 );
@@ -66,6 +76,7 @@ CREATE TABLE Comments (
     comment_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     content TEXT,
     rating_stars INT,
+    create_date DATETIME DEFAULT CURRENT_TIMESTAMP 
     FOREIGN KEY (job_id) REFERENCES Jobs(id),
     FOREIGN KEY (user_id) REFERENCES Users(id)
 );

@@ -15,6 +15,7 @@ model Comments {
   comment_date DateTime? @default(now()) @db.DateTime(0)
   content      String?   @db.Text
   rating_stars Int?
+  create_date  DateTime? @default(now()) @db.DateTime(0)
   Jobs         Jobs?     @relation(fields: [job_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "Comments_ibfk_1")
   Users        Users?    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "Comments_ibfk_2")
 
@@ -28,6 +29,7 @@ model HiredJobs {
   hirer_id     Int?
   hire_date    DateTime? @default(now()) @db.DateTime(0)
   is_completed Boolean?  @default(false)
+  create_date  DateTime? @default(now()) @db.DateTime(0)
   Jobs         Jobs?     @relation(fields: [job_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "HiredJobs_ibfk_1")
   Users        Users?    @relation(fields: [hirer_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "HiredJobs_ibfk_2")
 
@@ -38,6 +40,7 @@ model HiredJobs {
 model JobCategories {
   id               Int                @id @default(autoincrement())
   category_name    String             @db.VarChar(255)
+  create_date      DateTime?          @default(now()) @db.DateTime(0)
   JobSubCategories JobSubCategories[]
 }
 
@@ -46,6 +49,7 @@ model JobSubCategories {
   sub_category_name String         @db.VarChar(255)
   image             String?        @db.VarChar(255)
   category_id       Int?
+  create_date       DateTime?      @default(now()) @db.DateTime(0)
   JobCategories     JobCategories? @relation(fields: [category_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "JobSubCategories_ibfk_1")
   Jobs              Jobs[]
 
@@ -63,6 +67,7 @@ model Jobs {
   job_stars         Int?              @default(0)
   sub_category_id   Int?
   creator_id        Int?
+  create_date       DateTime?         @default(now()) @db.DateTime(0)
   Comments          Comments[]
   HiredJobs         HiredJobs[]
   JobSubCategories  JobSubCategories? @relation(fields: [sub_category_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "Jobs_ibfk_1")
@@ -83,6 +88,7 @@ model Users {
   role          String      @db.VarChar(50)
   skill         String?     @db.Text
   certification String?     @db.Text
+  create_date   DateTime?   @default(now()) @db.DateTime(0)
   Comments      Comments[]
   HiredJobs     HiredJobs[]
   Jobs          Jobs[]

@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
 import { IsString, IsEmail, IsNotEmpty, MaxLength, MinLength, IsNumber, IsPhoneNumber, IsOptional, IsDateString, IsEnum, Matches, IsDate, IsArray } from 'class-validator';
 
-export class RegisterRequestDto {
+export class UserRequestDto {
   @IsString()
   @IsNotEmpty()
   @MaxLength(50, { message: 'Name must be less than 50 characters' })

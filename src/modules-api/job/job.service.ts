@@ -1,26 +1,61 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateJobDto } from './dto/create-job.dto';
 import { UpdateJobDto } from './dto/update-job.dto';
+import { PrismaService } from 'src/modules-system/prisma/prisma.service';
+import { buildQueryPrisma } from 'src/common/helpers/query-pagination.helper';
+import { QueryJobPaginationDto } from './dto/search-job.dto';
+import { Public } from 'src/common/decorators/public.decorator';
 
 @Injectable()
 export class JobService {
-  create(createJobDto: CreateJobDto) {
-    return 'This action adds a new job';
+  constructor(private prisma: PrismaService) { }
+  @Public()
+  async create(body: CreateJobDto) {
+    return await this.prisma.jobs.create({
+      data: body,
+    });
   }
 
-  findAll() {
-    return `This action returns all job`;
+  @Public()
+  async findAll(query: QueryJobPaginationDto) {
+    const { page, pageSize, index, filterValue } = buildQueryPrisma(query);
+    const [totalItem, result] = await Promise.all([
+      this.prisma.jobs.count({
+        where: filterValue,
+      }),
+      this.prisma.jobs.findMany({
+        where: filterValue,
+        skip: index,
+        take: pageSize,
+      }),
+    ]);
+    return {
+      page,
+      pageSize,
+      totalPage: Math.ceil(totalItem / pageSize),
+      totalItem: totalItem,
+      items: result,
+    };
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} job`;
+  async findOne(id: number) {
+    const job = await this.prisma.jobs.findUnique({ where: { id } });
+    if (!job) throw new BadRequestException(`Job not found`);
+    return job;
   }
 
-  update(id: number, updateJobDto: UpdateJobDto) {
-    return `This action updates a #${id} job`;
+  async update(id: number, updateJobDto: UpdateJobDto) {
+    const existingJob = await this.prisma.jobs.findUnique({ where: { id } });
+    if (!existingJob) throw new BadRequestException(`Job not found`);
+    return await this.prisma.jobs.update({
+      where: { id },
+      data: updateJobDto,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} job`;
+  async remove(id: number) {
+    const existingJob = await this.prisma.jobs.findUnique({ where: { id } });
+    if (!existingJob) throw new BadRequestException(`Job not found`);
+    return await this.prisma.jobs.delete({ where: { id } });
   }
 }

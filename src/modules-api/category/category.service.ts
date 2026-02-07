@@ -1,26 +1,39 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
+import { PrismaService } from 'src/modules-system/prisma/prisma.service';
+
 
 @Injectable()
 export class CategoryService {
-  create(createCategoryDto: CreateCategoryDto) {
-    return 'This action adds a new category';
+  constructor(private prisma: PrismaService) { }
+  async create(createCategoryDto: CreateCategoryDto) {
+    const result = await this.prisma.jobCategories.create({ data: createCategoryDto });
+    return result;
   }
 
-  findAll() {
-    return `This action returns all category`;
+  async findAll() {
+    const result = await this.prisma.jobCategories.findMany();
+    return result;
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} category`;
+    const result = this.prisma.jobCategories.findUnique({ where: { id } });
+    if (!result) throw new BadRequestException('Category not found');
+    return result;
   }
 
   update(id: number, updateCategoryDto: UpdateCategoryDto) {
-    return `This action updates a #${id} category`;
+    const category = this.prisma.jobCategories.findUnique({ where: { id } });
+    if (!category) throw new BadRequestException('Category not found');
+    const result = this.prisma.jobCategories.update({ where: { id }, data: updateCategoryDto });
+    return result;
   }
 
   remove(id: number) {
-    return `This action removes a #${id} category`;
+    const category = this.prisma.jobCategories.findUnique({ where: { id } });
+    if (!category) throw new BadRequestException('Category not found');
+    const result = this.prisma.jobCategories.delete({ where: { id } });
+    return result;
   }
 }

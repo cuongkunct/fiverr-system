@@ -1,20 +1,23 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { CommentService } from './comment.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { UpdateCommentDto } from './dto/update-comment.dto';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @Controller('comment')
+@ApiTags('Comment')
 export class CommentController {
-  constructor(private readonly commentService: CommentService) {}
+  constructor(private readonly commentService: CommentService) { }
 
   @Post()
-  create(@Body() createCommentDto: CreateCommentDto) {
-    return this.commentService.create(createCommentDto);
+  create(@Body() body: CreateCommentDto) {
+    return this.commentService.create(body);
   }
 
   @Get()
-  findAll() {
-    return this.commentService.findAll();
+  @ApiOperation({ summary: 'Lấy danh sách bình luận (Có thể lọc theo job_id)' })
+  findAll(@Query('job_id') job_id: string) {
+    return this.commentService.findAll(job_id ? +job_id : undefined);
   }
 
   @Get(':id')

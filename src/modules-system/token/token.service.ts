@@ -7,21 +7,29 @@ import {
 
 @Injectable()
 export class TokenService {
-  createTokens(userId) {
+  createTokens(userId, role) {
     const accessToken: string = jsonwebtoken.sign(
-      { userId: userId as string },
+      {
+        userId,
+        role
+      },
       ACCESS_TOKEN_SECRET,
-      { expiresIn: '1h' },
+      { expiresIn: '60m' },
     );
     const refreshToken = jsonwebtoken.sign(
-      { userId: userId as string },
+      {
+        userId,
+        role
+      },
       REFRESH_TOKEN_SECRET,
-      { expiresIn: '1d' },
+      { expiresIn: '7d' },
     );
 
     return {
-      accessToken: accessToken,
-      refreshToken: refreshToken,
+      tokens: {
+        accessToken,
+        refreshToken,
+      }
     };
   }
 
