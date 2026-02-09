@@ -32,12 +32,12 @@ export class ProtectGuard implements CanActivate {
       return true;
     }
 
-    const requiredRoles = this.reflector.getAllAndOverride<string[]>(ROLES_KEY, [
-      context.getHandler(),
-      context.getClass(),
-    ]);
-    console.log("requiredRoles", requiredRoles);
-    if (!requiredRoles) return true;
+    // const requiredRoles = this.reflector.getAllAndOverride<string[]>(ROLES_KEY, [
+    //   context.getHandler(),
+    //   context.getClass(),
+    // ]);
+    // console.log("requiredRoles", requiredRoles);
+    // if (!requiredRoles) return true;
 
     const request = context.switchToHttp().getRequest();
     const token = this.extractTokenFromHeader(request);
@@ -58,9 +58,9 @@ export class ProtectGuard implements CanActivate {
         throw new UnauthorizedException('Unauthorized');
       }
 
-      if (!requiredRoles.includes(userExist.role)) {
-        throw new UnauthorizedException('Unauthorized');
-      }
+      // if (!requiredRoles.includes(userExist.role)) {
+      //   throw new UnauthorizedException('Unauthorized');
+      // }
 
       request['user'] = userExist;
     } catch (err) {

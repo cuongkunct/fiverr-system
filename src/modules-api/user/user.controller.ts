@@ -1,29 +1,41 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UseInterceptors, UploadedFiles, UploadedFile, BadRequestException, ParseFilePipe, MaxFileSizeValidator, FileTypeValidator } from '@nestjs/common';
 import { UserService } from './user.service';
-import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiConsumes, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UserRequestDto } from './dto/create-user-request.dto';
 import { UserResponseDto } from './dto/create-user-response.dto';
 import { QueryDto, QueryUserPaginationDto } from './dto/query-user.dto';
-import { Public } from 'src/common/decorators/public.decorator';
-import { Roles } from 'src/common/decorators/role.decorator';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { CloudinaryService } from './../../modules-system/cloudinary/cloudinary.service';
+import { FileUploadDto } from './dto/upload-file.dto';
+
 
 
 @Controller('user')
 @ApiTags('Users')
-@ApiBearerAuth()
 export class UserController {
   constructor(private readonly userService: UserService) { }
 
   @Get()
-  @Roles('ADMIN')
   @ApiOperation({ summary: 'Get all users' })
   @ApiResponse({ status: 200, description: 'Get all users success' })
   findAll() {
     return this.userService.findAll();
   }
 
+  @Post('upload-image')
+  @ApiConsumes('multipart/form-data')
+  @UseInterceptors(FileInterceptor('file'))
+  async uploadImage(@Body() body: FileUploadDto, @UploadedFile(new ParseFilePipe({
+    validators: [
+      new MaxFileSizeValidator({ maxSize: 2097152 }), // Kiểm tra cho phép tối đa 2mb/ kiểm tra empty lun
+      new FileTypeValidator({ fileType: '.(png|jpeg|jpg)' }), // Giới hạn các file được nhận
+    ],
+  })) file: Express.Multer.File) {
+    const result = await this.userService.uploadAvatar(body, file);
+    return result;
+  }
+
   @Post()
-  @Roles('ADMIN')
   @ApiOperation({ summary: 'Create user' })
   @ApiResponse({ status: 200, description: 'Create user success' })
   async create(@Body() body: UserRequestDto): Promise<UserResponseDto> {
@@ -32,7 +44,6 @@ export class UserController {
   }
 
   @Get('search')
-  @Roles('ADMIN')
   @ApiOperation({ summary: 'Get all users' })
   @ApiResponse({ status: 200, description: 'Get all users success' })
   searchAll(
@@ -42,20 +53,8 @@ export class UserController {
     return this.userService.searchAll(query);
   }
 
-  @Get('searchPagination')
-  @Roles('ADMIN')
-  @ApiOperation({ summary: 'Get all users' })
-  @ApiResponse({ status: 200, description: 'Get all users success' })
-  searchPagination(
-    @Query()
-    query: QueryUserPaginationDto,
-  ) {
-    return this.userService.searchPagination(query);
-  }
-
 
   @Get(':id')
-  @Public()
   @ApiOperation({ summary: 'Find one user using id' })
   @ApiResponse({ status: 200, description: 'Find one user using id success' })
   async findOne(@Param('id') id: string): Promise<UserResponseDto> {
@@ -64,7 +63,6 @@ export class UserController {
   }
 
   @Patch(':id')
-  @Public()
   @ApiOperation({ summary: 'Update user using id' })
   @ApiResponse({ status: 200, description: 'Update user using id success' })
   async update(@Param('id') id: string, @Body() body: UserRequestDto): Promise<UserResponseDto> {
@@ -73,7 +71,6 @@ export class UserController {
   }
 
   @Delete(':id')
-  @Roles('ADMIN')
   @ApiOperation({ summary: 'Remove user using id' })
   @ApiResponse({ status: 200, description: 'Remove user using id success' })
   remove(@Param('id') id: string) {

@@ -12,7 +12,6 @@ import { LoginResponseDto } from './dto/login-respone.dto';
 import { Public } from 'src/common/decorators/public.decorator';
 
 @ApiTags('Auth') // Tạo group API
-@ApiBearerAuth()
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) { }

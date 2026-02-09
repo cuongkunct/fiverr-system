@@ -6,23 +6,28 @@ import {
   IsOptional,
   IsString,
   Min,
-  Max
+  Max,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 
 export class CreateJobDto {
   @ApiProperty({ example: 'Thiết kế Website chuyên nghiệp' })
-  @IsString()
   @IsNotEmpty()
+  @IsString()
   job_name: string;
 
-  @ApiProperty({ example: 5, description: 'Số sao đánh giá từ 1-5' })
+  @ApiProperty({
+    example: 5,
+    description: 'Số sao đánh giá từ 1-5',
+    required: false,
+    default: 0
+  })
   @IsOptional()
   @Type(() => Number)
   @IsInt()
   @Min(0)
   @Max(5)
-  rating: number = 0;
+  rating?: number = 0;
 
   @ApiProperty({ example: 1000 })
   @IsNotEmpty()
@@ -31,28 +36,35 @@ export class CreateJobDto {
   @Min(1)
   price: number;
 
-  @ApiProperty({ example: 'https://image.com/job.png', required: false })
+  @ApiProperty({
+    example: 'https://image.com/job.png',
+    required: false
+  })
   @IsOptional()
   @IsString()
   image?: string;
 
   @ApiProperty({ example: 'Làm web nhanh trong 24h' })
-  @IsString()
   @IsNotEmpty()
+  @IsString()
   description: string;
 
-  @ApiProperty({ example: 10, description: 'Mô tả chi tiết về công việc...' })
+  @ApiProperty({ example: 'Mô tả ngắn gọn về công việc' })
   @IsNotEmpty()
   @IsString()
   short_description: string;
 
-  @ApiProperty({ example: 5 })
+  @ApiProperty({
+    example: 5,
+    required: false,
+    default: 0
+  })
   @IsOptional()
   @Type(() => Number)
   @IsInt()
   @Min(0)
   @Max(5)
-  job_stars: number = 0;
+  job_stars?: number = 0;
 
   @ApiProperty({ example: 1 })
   @IsNotEmpty()

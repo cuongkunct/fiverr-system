@@ -917,7 +917,9 @@ export const UsersScalarFieldEnum = {
   role: 'role',
   skill: 'skill',
   certification: 'certification',
-  create_date: 'create_date'
+  create_date: 'create_date',
+  isDeleted: 'isDeleted',
+  avatar: 'avatar'
 } as const
 
 export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof UsersScalarFieldEnum]
@@ -979,7 +981,8 @@ export const UsersOrderByRelevanceFieldEnum = {
   gender: 'gender',
   role: 'role',
   skill: 'skill',
-  certification: 'certification'
+  certification: 'certification',
+  avatar: 'avatar'
 } as const
 
 export type UsersOrderByRelevanceFieldEnum = (typeof UsersOrderByRelevanceFieldEnum)[keyof typeof UsersOrderByRelevanceFieldEnum]

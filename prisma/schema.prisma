@@ -89,6 +89,8 @@ model Users {
   skill         String?     @db.Text
   certification String?     @db.Text
   create_date   DateTime?   @default(now()) @db.DateTime(0)
+  isDeleted     Boolean     @default(false)
+  avatar        String?     @db.VarChar(255)
   Comments      Comments[]
   HiredJobs     HiredJobs[]
   Jobs          Jobs[]

@@ -1,13 +1,15 @@
-import { BadRequestException, Injectable, Query } from '@nestjs/common';
+import { BadRequestException, Injectable, Query, Body } from '@nestjs/common';
 import { PrismaService } from 'src/modules-system/prisma/prisma.service';
 import { UserRequestDto } from './dto/create-user-request.dto';
 import * as bcrypt from 'bcrypt';
 import { QueryDto, QueryUserPaginationDto } from './dto/query-user.dto';
 import { buildQueryPrisma } from 'src/common/helpers/query-pagination.helper';
+import { CloudinaryService } from './../../modules-system/cloudinary/cloudinary.service';
+import { FileUploadDto } from './dto/upload-file.dto';
 
 @Injectable()
 export class UserService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService, private cloudinaryService: CloudinaryService) { }
   async create(body: UserRequestDto) {
     const { email, password } = body;
     const userExists = await this.prisma.users.findUnique({ where: { email } });
@@ -24,6 +26,22 @@ export class UserService {
       }
     });
     return user;
+  }
+
+  async uploadAvatar(body: FileUploadDto, file: Express.Multer.File) {
+    const { description } = body
+    const userExists = await this.prisma.users.findUnique({ where: { email: description } });
+    if (!file) {
+      throw new BadRequestException('Vui lòng chọn file!');
+    }
+
+    console.log(" file", file);
+    console.log(" body", body);
+    // const result = await this.cloudinaryService.uploadFile(file);
+    // return {
+    //   url: result.secure_url,
+    //   public_id: result.public_id,
+    // };
   }
 
   async findAll() {
@@ -54,13 +72,16 @@ export class UserService {
 
   async searchPagination(query: QueryUserPaginationDto) {
     const { page, pageSize, index, filterValue } = buildQueryPrisma(query);
-
+    const whereCondition = {
+      ...filterValue,
+      isDeleted: false,
+    };
     const [totalItem, result] = await Promise.all([
       this.prisma.users.count({
         where: filterValue,
       }),
       this.prisma.users.findMany({
-        where: filterValue,
+        where: whereCondition,
         skip: index,
         take: pageSize,
       }),
@@ -102,7 +123,7 @@ export class UserService {
   async remove(id: number) {
     const user = await this.prisma.users.findUnique({ where: { id } });
     if (!user) throw new BadRequestException('User not found');
-    const result = await this.prisma.users.delete({ where: { id } });
+    const result = await this.prisma.users.update({ where: { id }, data: { isDeleted: true } });
     return result;
   }
 }
