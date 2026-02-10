@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestj
 import { CommentService } from './comment.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { UpdateCommentDto } from './dto/update-comment.dto';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
 
 @Controller('comment')
 @ApiTags('Comment')
@@ -16,6 +16,7 @@ export class CommentController {
 
   @Get()
   @ApiOperation({ summary: 'Lấy danh sách bình luận (Có thể lọc theo job_id)' })
+  @ApiQuery({ name: 'job_id', required: false })
   findAll(@Query('job_id') job_id: string) {
     return this.commentService.findAll(job_id ? +job_id : undefined);
   }

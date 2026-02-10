@@ -7,6 +7,8 @@ import { QueryDto, QueryUserPaginationDto } from './dto/query-user.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CloudinaryService } from './../../modules-system/cloudinary/cloudinary.service';
 import { FileUploadDto } from './dto/upload-file.dto';
+import { User } from 'src/common/decorators/user.decorator';
+import { Users } from 'src/modules-system/prisma/generated/prisma/client';
 
 
 
@@ -25,14 +27,14 @@ export class UserController {
   @Post('upload-image')
   @ApiConsumes('multipart/form-data')
   @UseInterceptors(FileInterceptor('file'))
-  async uploadImage(@Body() body: FileUploadDto, @UploadedFile(new ParseFilePipe({
+  async uploadImage(@Body() body: FileUploadDto, @User() user: any, @UploadedFile(new ParseFilePipe({
     validators: [
       new MaxFileSizeValidator({ maxSize: 2097152 }), // Kiểm tra cho phép tối đa 2mb/ kiểm tra empty lun
       new FileTypeValidator({ fileType: '.(png|jpeg|jpg)' }), // Giới hạn các file được nhận
     ],
-  })) file: Express.Multer.File) {
-    const result = await this.userService.uploadAvatar(body, file);
-    return result;
+  })) file: Express.Multer.File): Promise<UserResponseDto> {
+    const result = await this.userService.uploadAvatar(user, body, file);
+    return new UserResponseDto(result as UserResponseDto);
   }
 
   @Post()

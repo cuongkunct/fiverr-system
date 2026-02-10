@@ -28,6 +28,10 @@ export class UserResponseDto {
 
   @Expose() role: string;
 
+  @Expose()
+  @Transform(({ value }) => value ?? '')
+  avatar: string;
+
   @Exclude()
   password?: string;
 

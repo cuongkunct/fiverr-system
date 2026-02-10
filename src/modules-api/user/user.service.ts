@@ -6,6 +6,7 @@ import { QueryDto, QueryUserPaginationDto } from './dto/query-user.dto';
 import { buildQueryPrisma } from 'src/common/helpers/query-pagination.helper';
 import { CloudinaryService } from './../../modules-system/cloudinary/cloudinary.service';
 import { FileUploadDto } from './dto/upload-file.dto';
+import { UserResponseDto } from './dto/create-user-response.dto';
 
 @Injectable()
 export class UserService {
@@ -28,20 +29,25 @@ export class UserService {
     return user;
   }
 
-  async uploadAvatar(body: FileUploadDto, file: Express.Multer.File) {
+  async uploadAvatar(user: any, body: FileUploadDto, file: Express.Multer.File) {
     const { description } = body
-    const userExists = await this.prisma.users.findUnique({ where: { email: description } });
+    const userExists = await this.prisma.users.findUnique({ where: { id: user.id } });
+    if (!userExists) {
+      throw new BadRequestException('User not found');
+    }
     if (!file) {
       throw new BadRequestException('Vui lòng chọn file!');
     }
-
-    console.log(" file", file);
-    console.log(" body", body);
-    // const result = await this.cloudinaryService.uploadFile(file);
-    // return {
-    //   url: result.secure_url,
-    //   public_id: result.public_id,
-    // };
+    const secure = await this.cloudinaryService.uploadFile(file);
+    const result = await this.prisma.users.update({
+      where: {
+        id: user.id,
+      },
+      data: {
+        avatar: secure.secure_url,
+      },
+    });
+    return result;
   }
 
   async findAll() {
