@@ -32,12 +32,11 @@ export class ProtectGuard implements CanActivate {
       return true;
     }
 
-    // const requiredRoles = this.reflector.getAllAndOverride<string[]>(ROLES_KEY, [
-    //   context.getHandler(),
-    //   context.getClass(),
-    // ]);
-    // console.log("requiredRoles", requiredRoles);
-    // if (!requiredRoles) return true;
+    const requiredRoles = this.reflector.getAllAndOverride<string[]>(ROLES_KEY, [
+      context.getHandler(),
+      context.getClass(),
+    ]);
+
 
     const request = context.switchToHttp().getRequest();
     const token = this.extractTokenFromHeader(request);
@@ -46,30 +45,30 @@ export class ProtectGuard implements CanActivate {
     }
     try {
       const payload = await this.tokenService.verifyAccessToken(token);
-      console.log("payload", payload);
 
       const userExist = await this.prisma.users.findUnique({
-        where: {
-          id: (payload as any).userId,
-        },
+        where: { id: (payload as any).userId },
       });
 
       if (!userExist) {
-        throw new UnauthorizedException('Unauthorized');
+        throw new UnauthorizedException('User not found');
       }
 
-      // if (!requiredRoles.includes(userExist.role)) {
-      //   throw new UnauthorizedException('Unauthorized');
-      // }
-
+      if (requiredRoles && requiredRoles.length > 0) {
+        const hasRole = requiredRoles.includes(userExist.role);
+        if (!hasRole) {
+          throw new ForbiddenException('You are not allowed to access this resource');
+        }
+      }
       request['user'] = userExist;
     } catch (err) {
-      switch (err.constructor) {
-        case TokenExpiredError:
-          throw new ForbiddenException(err.message);
-        default:
-          throw new UnauthorizedException();
+      if (err instanceof ForbiddenException || err instanceof UnauthorizedException) {
+        throw err;
       }
+      if (err instanceof TokenExpiredError) {
+        throw new UnauthorizedException('Token is expired. Please log in again.');
+      }
+      throw new UnauthorizedException('Token is invalid or has expired');
     }
     return true;
   }

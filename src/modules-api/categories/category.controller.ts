@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiParam, ApiProperty, ApiTags } from '@nestjs/swagger';
 import { Public } from 'src/common/decorators/public.decorator';
 import { Roles } from 'src/common/decorators/role.decorator';
 
@@ -12,15 +12,29 @@ export class CategoryController {
   constructor(private readonly categoryService: CategoryService) { }
 
   @Post()
-  @Roles('ADMIN')
+  @Public()
   create(@Body() createCategoryDto: CreateCategoryDto) {
     return this.categoryService.create(createCategoryDto);
   }
+
+
 
   @Get()
   @Public()
   findAll() {
     return this.categoryService.findAll();
+  }
+
+  @Get('search/:searchKey')
+  @Public()
+  @ApiParam({
+    name: 'searchKey',
+    required: false,
+    description: 'Search by category name',
+    example: 'web design'
+  })
+  searchCategory(@Param('searchKey') searchKey: string) {
+    return this.categoryService.searchCategory(searchKey);
   }
 
   @Get(':id')
@@ -30,13 +44,13 @@ export class CategoryController {
   }
 
   @Patch(':id')
-  @Roles('ADMIN')
+  @Public()
   update(@Param('id') id: string, @Body() updateCategoryDto: UpdateCategoryDto) {
     return this.categoryService.update(+id, updateCategoryDto);
   }
 
   @Delete(':id')
-  @Roles('ADMIN')
+  @Public()
   remove(@Param('id') id: string) {
     return this.categoryService.remove(+id);
   }

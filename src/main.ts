@@ -5,6 +5,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'; // https://doc
 import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
 import { ResponseSuccessInterceptor } from './common/interceptors/response-success.interceptor';
 import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
+import { HttpExceptionFilter } from './common/interceptors/http-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -17,6 +18,8 @@ async function bootstrap() {
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
   //Format Response - https://docs.nestjs.com/interceptors
   app.useGlobalInterceptors(new ResponseSuccessInterceptor());
+  //https://docs.nestjs.com/exception-filters
+  app.useGlobalFilters(new HttpExceptionFilter());
   //Validation Pipe - https://docs.nestjs.com/techniques/validation
   app.useGlobalPipes(new ValidationPipe({
     whitelist: true,     // Loại bỏ các field không khai báo trong DTO
@@ -29,7 +32,17 @@ async function bootstrap() {
     .setTitle('Fiverr API')
     .setDescription('Danh sách API cho hệ thống Fiverr')
     .setVersion('1.0')
-    .addBearerAuth()
+    .addBearerAuth(
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        name: 'JWT',
+        description: 'Nhập token JWT của bạn',
+        in: 'header',
+      },
+      'JWT-auth',
+    )
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

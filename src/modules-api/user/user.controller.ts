@@ -1,25 +1,29 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UseInterceptors, UploadedFiles, UploadedFile, BadRequestException, ParseFilePipe, MaxFileSizeValidator, FileTypeValidator } from '@nestjs/common';
 import { UserService } from './user.service';
-import { ApiBody, ApiConsumes, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiConsumes, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UserRequestDto } from './dto/create-user-request.dto';
 import { UserResponseDto } from './dto/create-user-response.dto';
-import { QueryDto, QueryUserPaginationDto } from './dto/query-user.dto';
+import { QueryUserPaginationDto } from './dto/query-user.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CloudinaryService } from './../../modules-system/cloudinary/cloudinary.service';
 import { FileUploadDto } from './dto/upload-file.dto';
 import { User } from 'src/common/decorators/user.decorator';
 import { Users } from 'src/modules-system/prisma/generated/prisma/client';
+import { Public } from 'src/common/decorators/public.decorator';
+import { Roles } from 'src/common/decorators/role.decorator';
 
 
 
 @Controller('user')
 @ApiTags('Users')
+@ApiBearerAuth('JWT-auth')
 export class UserController {
   constructor(private readonly userService: UserService) { }
 
   @Get()
   @ApiOperation({ summary: 'Get all users' })
   @ApiResponse({ status: 200, description: 'Get all users success' })
+  @Roles('ADMIN')
   findAll() {
     return this.userService.findAll();
   }
@@ -27,9 +31,10 @@ export class UserController {
   @Post('upload-image')
   @ApiConsumes('multipart/form-data')
   @UseInterceptors(FileInterceptor('file'))
+  @Public()
   async uploadImage(@Body() body: FileUploadDto, @User() user: any, @UploadedFile(new ParseFilePipe({
     validators: [
-      new MaxFileSizeValidator({ maxSize: 2097152 }), // Kiểm tra cho phép tối đa 2mb/ kiểm tra empty lun
+      new MaxFileSizeValidator({ maxSize: 2097152 }), // Kiểm tra cho phép tối đa 2mb/ kiểm tra empty
       new FileTypeValidator({ fileType: '.(png|jpeg|jpg)' }), // Giới hạn các file được nhận
     ],
   })) file: Express.Multer.File): Promise<UserResponseDto> {
@@ -45,20 +50,30 @@ export class UserController {
     return new UserResponseDto(result as UserResponseDto);
   }
 
-  @Get('search')
-  @ApiOperation({ summary: 'Get all users' })
+  @Get('search/:searchKey')
+  @ApiOperation({ summary: 'Search all users by name or email' })
   @ApiResponse({ status: 200, description: 'Get all users success' })
-  searchAll(
-    @Query()
-    query: QueryDto,
+  @Public()
+  search(
+    @Param('searchKey') searchKey?: string
   ) {
-    return this.userService.searchAll(query);
+    return this.userService.search(searchKey || '');
   }
 
+  @Get('searchPagination')
+  @ApiOperation({ summary: 'Search pagination all users' })
+  @ApiResponse({ status: 200, description: 'Get all users success' })
+  @Public()
+  searchPagination(
+    @Query() query: QueryUserPaginationDto
+  ) {
+    return this.userService.searchPagination(query);
+  }
 
   @Get(':id')
   @ApiOperation({ summary: 'Find one user using id' })
   @ApiResponse({ status: 200, description: 'Find one user using id success' })
+  @Public()
   async findOne(@Param('id') id: string): Promise<UserResponseDto> {
     const result = await this.userService.findOne(+id);
     return new UserResponseDto(result as UserResponseDto);
@@ -67,6 +82,7 @@ export class UserController {
   @Patch(':id')
   @ApiOperation({ summary: 'Update user using id' })
   @ApiResponse({ status: 200, description: 'Update user using id success' })
+  @Public()
   async update(@Param('id') id: string, @Body() body: UserRequestDto): Promise<UserResponseDto> {
     const result = await this.userService.update(+id, body);
     return new UserResponseDto(result as UserResponseDto);
@@ -75,6 +91,7 @@ export class UserController {
   @Delete(':id')
   @ApiOperation({ summary: 'Remove user using id' })
   @ApiResponse({ status: 200, description: 'Remove user using id success' })
+  @Public()
   remove(@Param('id') id: string) {
     return this.userService.remove(+id);
   }

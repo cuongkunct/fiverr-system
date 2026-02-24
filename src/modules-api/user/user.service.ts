@@ -1,12 +1,12 @@
-import { BadRequestException, Injectable, Query, Body } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/modules-system/prisma/prisma.service';
 import { UserRequestDto } from './dto/create-user-request.dto';
 import * as bcrypt from 'bcrypt';
-import { QueryDto, QueryUserPaginationDto } from './dto/query-user.dto';
+import { QueryUserPaginationDto } from './dto/query-user.dto';
 import { buildQueryPrisma } from 'src/common/helpers/query-pagination.helper';
 import { CloudinaryService } from './../../modules-system/cloudinary/cloudinary.service';
 import { FileUploadDto } from './dto/upload-file.dto';
-import { UserResponseDto } from './dto/create-user-response.dto';
+
 
 @Injectable()
 export class UserService {
@@ -55,39 +55,64 @@ export class UserService {
     return result;
   }
 
-  async searchAll(query: QueryDto) {
-    let filters = {};
-    try {
-      filters = JSON.parse(query.filter);
-    } catch (error) {
-      filters = {};
-    }
-    const where = {};
-    for (const [key, value] of Object.entries(filters)) {
-      if (value && typeof value === "string" && value.trim() !== "") {
-        where[key] = {
-          contains: value,
-        };
-      }
-    }
+  async search(searchKey: string) {
     const result = await this.prisma.users.findMany({
-      where: where
-    });
+      where: {
+        OR: [
+          {
+            name: {
+              contains: searchKey,
+            },
+          },
+          {
+            email: {
+              contains: searchKey,
+            },
+          },
+        ],
+      },
+    })
     return result;
   }
 
   async searchPagination(query: QueryUserPaginationDto) {
-    const { page, pageSize, index, filterValue } = buildQueryPrisma(query);
-    const whereCondition = {
-      ...filterValue,
-      isDeleted: false,
-    };
+    const { page, pageSize, index, filters } = buildQueryPrisma(query);
+    // const whereCondition = {
+    //   ...filterValue,
+    //   isDeleted: false,
+    // };
     const [totalItem, result] = await Promise.all([
       this.prisma.users.count({
-        where: filterValue,
+        where: {
+          OR: [
+            {
+              name: {
+                contains: filters,
+              },
+            },
+            {
+              email: {
+                contains: filters,
+              },
+            },
+          ],
+        },
       }),
       this.prisma.users.findMany({
-        where: whereCondition,
+        where: {
+          OR: [
+            {
+              name: {
+                contains: filters,
+              },
+            },
+            {
+              email: {
+                contains: filters,
+              },
+            },
+          ],
+        },
         skip: index,
         take: pageSize,
       }),

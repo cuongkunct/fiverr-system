@@ -13,7 +13,20 @@ export class CategoryService {
   }
 
   async findAll() {
-    const result = await this.prisma.jobCategories.findMany();
+    const result = await this.prisma.jobCategories.findMany({
+      include: {
+        JobSubCategories: true,
+      },
+    });
+    return result;
+  }
+
+  async searchCategory(searchKey: string) {
+    const result = await this.prisma.jobCategories.findMany({
+      where: {
+        category_name: { contains: searchKey }
+      }
+    });
     return result;
   }
 

@@ -1,16 +1,10 @@
 import { IsOptional, IsString } from 'class-validator';
 import { ApiPropertyOptional } from '@nestjs/swagger';
-import { Query } from '@nestjs/common';
 
-export class QueryDto {
-  @ApiPropertyOptional({ example: '{"name": "", "phone": "", "email: ""}' })
-  @IsOptional()
-  @IsString()
-  filter: string;
-}
 
 export class QueryUserPaginationDto {
-  @ApiPropertyOptional({ example: '{"name": "", "phone": "", "email: ""}' })
+  // @ApiPropertyOptional({ example: '{"name": "", "phone": "", "email: ""}' })
+  @ApiPropertyOptional({ example: 'Enter name or email' })
   @IsOptional()
   @IsString()
   filters: string;

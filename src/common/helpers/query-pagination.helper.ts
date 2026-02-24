@@ -7,29 +7,29 @@ export const buildQueryPrisma = (query: any) => {
 
   pageSize = Math.max(pageSize, pageSizeDefault);
   page = Math.max(page, pageDefault);
-  try {
-    filters = JSON.parse(filters);
-  } catch (error) {
-    filters = {};
-  }
-  const where = {};
-  for (const [key, value] of Object.entries(filters)) {
-    if (value && typeof value === "string" && value.trim() !== "") {
-      where[key] = {
-        contains: value,
-      };
-    }
-  }
+  // try {
+  //   filters = JSON.parse(filters);
+  // } catch (error) {
+  //   filters = {};
+  // }
+  // const where = {};
+  // for (const [key, value] of Object.entries(filters)) {
+  //   if (value && typeof value === "string" && value.trim() !== "") {
+  //     where[key] = {
+  //       contains: value,
+  //     };
+  //   }
+  // }
 
   const index = (page - 1) * pageSize;
 
-  const filterValue = {
-    ...where,
-  };
+  // const filterValue = {
+  //   ...where,
+  // };
   return {
     page,
     pageSize,
     index,
-    filterValue,
+    filters,
   };
 };

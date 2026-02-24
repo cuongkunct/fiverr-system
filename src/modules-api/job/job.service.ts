@@ -9,22 +9,53 @@ import { Public } from 'src/common/decorators/public.decorator';
 @Injectable()
 export class JobService {
   constructor(private prisma: PrismaService) { }
-  @Public()
+
   async create(body: CreateJobDto) {
     return await this.prisma.jobs.create({
       data: body,
     });
   }
 
-  @Public()
-  async findAll(query: QueryJobPaginationDto) {
-    const { page, pageSize, index, filterValue } = buildQueryPrisma(query);
+
+  async findAll() {
+    const result = await this.prisma.jobs.findMany();
+    return result;
+  }
+
+  async searchPagination(query: QueryJobPaginationDto) {
+    const { page, pageSize, index, filters } = buildQueryPrisma(query);
     const [totalItem, result] = await Promise.all([
       this.prisma.jobs.count({
-        where: filterValue,
+        where: {
+          OR: [
+            {
+              job_name: {
+                contains: filters,
+              },
+            },
+            {
+              description: {
+                contains: filters,
+              },
+            },
+          ],
+        },
       }),
       this.prisma.jobs.findMany({
-        where: filterValue,
+        where: {
+          OR: [
+            {
+              job_name: {
+                contains: filters,
+              },
+            },
+            {
+              description: {
+                contains: filters,
+              },
+            },
+          ],
+        },
         skip: index,
         take: pageSize,
       }),
