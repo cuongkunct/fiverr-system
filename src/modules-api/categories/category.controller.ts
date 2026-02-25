@@ -2,22 +2,20 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
-import { ApiParam, ApiProperty, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiParam, ApiProperty, ApiTags } from '@nestjs/swagger';
 import { Public } from 'src/common/decorators/public.decorator';
 import { Roles } from 'src/common/decorators/role.decorator';
 
 @ApiTags('Category')
 @Controller('category')
+@ApiBearerAuth('JWT-auth')
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) { }
 
   @Post()
-  @Public()
   create(@Body() createCategoryDto: CreateCategoryDto) {
     return this.categoryService.create(createCategoryDto);
   }
-
-
 
   @Get()
   @Public()
@@ -44,13 +42,11 @@ export class CategoryController {
   }
 
   @Patch(':id')
-  @Public()
   update(@Param('id') id: string, @Body() updateCategoryDto: UpdateCategoryDto) {
     return this.categoryService.update(+id, updateCategoryDto);
   }
 
   @Delete(':id')
-  @Public()
   remove(@Param('id') id: string) {
     return this.categoryService.remove(+id);
   }

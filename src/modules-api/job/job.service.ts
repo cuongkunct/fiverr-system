@@ -5,10 +5,12 @@ import { PrismaService } from 'src/modules-system/prisma/prisma.service';
 import { buildQueryPrisma } from 'src/common/helpers/query-pagination.helper';
 import { QueryJobPaginationDto } from './dto/search-job.dto';
 import { Public } from 'src/common/decorators/public.decorator';
+import { FileUploadJobDto } from './dto/upload-file.dto';
+import { CloudinaryService } from 'src/modules-system/cloudinary/cloudinary.service';
 
 @Injectable()
 export class JobService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService, private cloudinaryService: CloudinaryService) { }
 
   async create(body: CreateJobDto) {
     return await this.prisma.jobs.create({
@@ -19,6 +21,24 @@ export class JobService {
 
   async findAll() {
     const result = await this.prisma.jobs.findMany();
+    return result;
+  }
+
+
+  async uploadImage(body: FileUploadJobDto, file: Express.Multer.File) {
+    const { job_id } = body
+    if (!file) {
+      throw new BadRequestException('Please choose file!');
+    }
+    const secure = await this.cloudinaryService.uploadFile(file);
+    const result = await this.prisma.jobs.update({
+      where: {
+        id: job_id,
+      },
+      data: {
+        image: secure.secure_url,
+      },
+    })
     return result;
   }
 

@@ -1,15 +1,17 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UseInterceptors, UploadedFile, ParseFilePipe, MaxFileSizeValidator, FileTypeValidator } from '@nestjs/common';
 import { JobService } from './job.service';
 import { CreateJobDto } from './dto/create-job.dto';
 import { UpdateJobDto } from './dto/update-job.dto';
 import { QueryJobPaginationDto } from './dto/search-job.dto';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiConsumes, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Public } from 'src/common/decorators/public.decorator';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { FileUploadJobDto } from './dto/upload-file.dto';
 
 
 @Controller('job')
 @ApiTags('Jobs')
-// @ApiBearerAuth('JWT-auth') 
+@ApiBearerAuth('JWT-auth')
 export class JobController {
   constructor(private readonly jobService: JobService) { }
 
@@ -37,6 +39,20 @@ export class JobController {
     return this.jobService.searchPagination(query);
   }
 
+  @Post('upload-image')
+  @ApiConsumes('multipart/form-data')
+  @UseInterceptors(FileInterceptor('file'))
+  @Public()
+  async uploadImage(@Body() body: FileUploadJobDto, @UploadedFile(new ParseFilePipe({
+    validators: [
+      new MaxFileSizeValidator({ maxSize: 2097152 }), // Kiểm tra cho phép tối đa 2mb/ kiểm tra empty
+      new FileTypeValidator({ fileType: '.(png|jpeg|jpg)' }), // Giới hạn các file được nhận
+    ],
+  })) file: Express.Multer.File) {
+    const result = await this.jobService.uploadImage(body, file);
+    return result;
+  }
+
   @Get(':id')
   @Public()
   findOne(@Param('id') id: string) {
@@ -44,13 +60,11 @@ export class JobController {
   }
 
   @Patch(':id')
-  @Public()
   update(@Param('id') id: string, @Body() updateJobDto: UpdateJobDto) {
     return this.jobService.update(+id, updateJobDto);
   }
 
   @Delete(':id')
-  @Public()
   remove(@Param('id') id: string) {
     return this.jobService.remove(+id);
   }

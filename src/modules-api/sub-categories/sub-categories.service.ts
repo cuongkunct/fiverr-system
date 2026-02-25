@@ -1,21 +1,44 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/modules-system/prisma/prisma.service';
 import { CreateSubCategoryDto } from './dto/create-sub-category.dto';
+import { FileUploadSubCategoryDto } from './dto/upload-file.dto';
+import { CloudinaryService } from 'src/modules-system/cloudinary/cloudinary.service';
 
 @Injectable()
 export class JobSubCategoriesService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService, private cloudinaryService: CloudinaryService) { }
 
   async create(data: CreateSubCategoryDto) {
     return await this.prisma.jobSubCategories.create({ data });
   }
 
-  async findAll(searchKey: string = '') {
+  async findAll() {
+    return await this.prisma.jobSubCategories.findMany();
+  }
+
+  async searchAll(searchKey: string = '') {
     return await this.prisma.jobSubCategories.findMany({
       where: {
         sub_category_name: { contains: searchKey }
       }
     });
+  }
+  async uploadImage(body: FileUploadSubCategoryDto, file: Express.Multer.File) {
+    const { job_sub_category_id } = body
+    console.log("job_sub_category_id", job_sub_category_id);
+    if (!file) {
+      throw new BadRequestException('Please choose file!');
+    }
+    const secure = await this.cloudinaryService.uploadFile(file);
+    const result = await this.prisma.jobSubCategories.update({
+      where: {
+        id: job_sub_category_id,
+      },
+      data: {
+        image: secure.secure_url,
+      },
+    })
+    return result;
   }
 
   async findOne(id: number) {

@@ -2,10 +2,12 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestj
 import { CommentService } from './comment.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { UpdateCommentDto } from './dto/update-comment.dto';
-import { ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
+import { Public } from 'src/common/decorators/public.decorator';
 
 @Controller('comment')
 @ApiTags('Comment')
+@ApiBearerAuth('JWT-auth')
 export class CommentController {
   constructor(private readonly commentService: CommentService) { }
 
@@ -15,8 +17,9 @@ export class CommentController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'Lấy danh sách bình luận (Có thể lọc theo job_id)' })
+  @ApiOperation({ summary: 'Get all comments or get comments by job_id' })
   @ApiQuery({ name: 'job_id', required: false })
+  @Public()
   findAll(@Query('job_id') job_id: string) {
     return this.commentService.findAll(job_id ? +job_id : undefined);
   }

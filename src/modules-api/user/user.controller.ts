@@ -5,10 +5,8 @@ import { UserRequestDto } from './dto/create-user-request.dto';
 import { UserResponseDto } from './dto/create-user-response.dto';
 import { QueryUserPaginationDto } from './dto/query-user.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { CloudinaryService } from './../../modules-system/cloudinary/cloudinary.service';
 import { FileUploadDto } from './dto/upload-file.dto';
 import { User } from 'src/common/decorators/user.decorator';
-import { Users } from 'src/modules-system/prisma/generated/prisma/client';
 import { Public } from 'src/common/decorators/public.decorator';
 import { Roles } from 'src/common/decorators/role.decorator';
 
@@ -45,6 +43,7 @@ export class UserController {
   @Post()
   @ApiOperation({ summary: 'Create user' })
   @ApiResponse({ status: 200, description: 'Create user success' })
+  @Public()
   async create(@Body() body: UserRequestDto): Promise<UserResponseDto> {
     const result = await this.userService.create(body);
     return new UserResponseDto(result as UserResponseDto);
@@ -91,7 +90,7 @@ export class UserController {
   @Delete(':id')
   @ApiOperation({ summary: 'Remove user using id' })
   @ApiResponse({ status: 200, description: 'Remove user using id success' })
-  @Public()
+  @Roles('ADMIN')
   remove(@Param('id') id: string) {
     return this.userService.remove(+id);
   }

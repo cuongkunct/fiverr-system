@@ -20,6 +20,14 @@ export class BookingService {
     });
   }
 
+  async findAllByHirer(user: any) {
+    const { id } = user;
+    return await this.prisma.hiredJobs.findMany({
+      where: { hirer_id: id },
+      orderBy: { create_date: 'desc' },
+    });
+  }
+
   async findOne(id: number) {
     const booking = await this.prisma.hiredJobs.findUnique({ where: { id } });
     if (!booking) throw new BadRequestException('Booking not found');
