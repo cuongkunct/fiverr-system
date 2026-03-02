@@ -12,10 +12,10 @@ jobs:
 
     steps:
       - name: Dừng container cũ
-        run: sudo docker container stop fiverr-backend
+        run: sudo docker container stop con-be-fiverr-system
 
       - name: Xoá container cũ
-        run: sudo docker container remove fiverr-backend
+        run: sudo docker container remove con-be-fiverr-system
 
       - name: Xoá image cũ
         run: sudo docker image remove cuongvan/img-be-fiverr-system
