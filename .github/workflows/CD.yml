@@ -10,17 +10,17 @@ jobs:
   starts:
     runs-on: self-hosted
 
-steps:
-  - name: Đăng nhập dockerhub
-    run: docker login -u cuongvan -p ${{secrets.PASS_DOCKER}}
+  steps:
+    - name: Đăng nhập dockerhub
+      run: docker login -u cuongvan -p ${{secrets.PASS_DOCKER}}
 
-  - name: Cập nhật hệ thống
-    run: |
-      # Dừng và dọn dẹp các container không còn dùng đến
-      sudo docker compose down
-      
-      # Kéo bản mới nhất của image cuongvan/img-be-fiverr-system
-      sudo docker compose pull
-      
-      # Khởi chạy lại toàn bộ (Backend + DB)
-      sudo docker compose up -d
+    - name: Cập nhật hệ thống
+      run: |
+        # Dừng và dọn dẹp các container không còn dùng đến
+        sudo docker compose down
+        
+        # Kéo bản mới nhất của image cuongvan/img-be-fiverr-system
+        sudo docker compose pull
+        
+        # Khởi chạy lại toàn bộ (Backend + DB)
+        sudo docker compose up -d
