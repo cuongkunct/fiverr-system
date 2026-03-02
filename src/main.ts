@@ -51,3 +51,5 @@ async function bootstrap() {
 }
 bootstrap();
 
+//1. Khai báo Global Interceptor
+//2. Khai báo Global Filter

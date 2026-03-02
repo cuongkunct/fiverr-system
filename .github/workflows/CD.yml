@@ -1,31 +1,24 @@
-name: Continuous Deployment
+name: CD docker
 
 on:
   workflow_run:
-    workflows: ["CI docker"]
+    workflows: ['CI docker']
     types:
       - completed
 
 jobs:
-  deploy: # Tên job
-    runs-on: self-hosted
-    # Chỉ chạy deploy nếu workflow CI trước đó thành công
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    
-    steps:
-      - name: Đăng nhập Docker Hub
-        run: echo "${{ secrets.PASS_DOCKER }}" | docker login -u cuongvan --password-stdin
+  starts:
+    runs-on: fiverr-system
 
-      - name: Triển khai hệ thống
-        run: |
-          # Di chuyển đến thư mục chứa file docker-compose.yml của bạn (thay đổi đường dẫn nếu cần)
-          # cd /path/to/your/project 
-          
-          # Dừng và dọn dẹp các container cũ
-          sudo docker compose down
-          
-          # Kéo bản mới nhất của image
-          sudo docker compose pull
-          
-          # Khởi chạy lại toàn bộ ở chế độ chạy ngầm
-          sudo docker compose up -d
+    steps:
+      - name: Dừng container cũ
+        run: sudo docker container stop con-be-fiverr-system
+
+      - name: Xoá container cũ
+        run: sudo docker container remove con-be-fiverr-system
+
+      - name: Xoá image cũ
+        run: sudo docker image remove cuongvan/img-be-fiverr-system:latest
+
+      - name: Kéo và chạy lại image trên docker hub
+        run: docker compose up -d
