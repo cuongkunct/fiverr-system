@@ -50,6 +50,3 @@ async function bootstrap() {
   await app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 }
 bootstrap();
-
-//1. Khai báo Global Interceptor
-//2. Khai báo Global Filter

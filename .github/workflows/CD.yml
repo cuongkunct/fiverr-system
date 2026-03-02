@@ -8,7 +8,7 @@ on:
 
 jobs:
   starts:
-    runs-on: fiverr-system
+    runs-on: self-hosted
 
     steps:
       - name: Dừng container cũ
