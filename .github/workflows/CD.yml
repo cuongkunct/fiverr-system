@@ -1,0 +1,24 @@
+name: CD docker
+
+on:
+  workflow_run:
+    workflows: ['CI docker']
+    types:
+      - completed
+
+jobs:
+  starts:
+    runs-on: self-hosted
+
+    steps:
+      - name: Dừng container cũ
+        run: sudo docker container stop fiverr-backend
+
+      - name: Xoá container cũ
+        run: sudo docker container remove fiverr-backend
+
+      - name: Xoá image cũ
+        run: sudo docker image remove cuongvan/img-be-fiverr-system
+
+      - name: Kéo và chạy lại image trên docker hub
+        run: docker compose up -d

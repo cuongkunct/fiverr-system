@@ -1,0 +1,17 @@
+services:
+  # docker run --name node-53-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag
+  db-mysql:
+    container_name: con-db-fiverr-system
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=12345
+    ports:
+      - 3307:3306
+
+  be-fiverr-system:
+    container_name: con-be-fiverr-system
+    image: cuongvan/img-be-fiverr-system:latest
+    ports:
+      - 3070:3069
+    env_file:
+      - .env

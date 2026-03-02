@@ -1,0 +1,23 @@
+name: CI docker
+
+on:
+  push:
+    branches: ['master']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Github tự động clone repository của bạn về máy ảo
+      - uses: actions/checkout@v4
+
+      # Github tạo PASS_DOCKER trong Actions secrets / New secret(trên dockerhub)
+      - name: Đăng nhập dockerhub
+        run: docker login -u cuongvan -p ${{secrets.PASS_DOCKER}}
+
+      - name: Build Image Docker
+        run: docker build -t cuongvan/img-be-fiverr-system:latest .
+
+      - name: Push Image lên docker hub
+        run: docker push cuongvan/img-be-fiverr-system
