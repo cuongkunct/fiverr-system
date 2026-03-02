@@ -7,6 +7,13 @@ import { PrismaService } from 'src/modules-system/prisma/prisma.service';
 export class CommentService {
   constructor(private prisma: PrismaService) { }
   async create(body: CreateCommentDto) {
+    const { job_id, user_id } = body;
+    const job = await this.prisma.jobs.findUnique({ where: { id: job_id } });
+    if (!job) throw new BadRequestException('Job not found');
+
+    const user = await this.prisma.users.findUnique({ where: { id: user_id } });
+    if (!user) throw new BadRequestException('User not found');
+
     const result = await this.prisma.comments.create({
       data: body
     });

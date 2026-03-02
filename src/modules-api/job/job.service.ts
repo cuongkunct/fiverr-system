@@ -4,7 +4,6 @@ import { UpdateJobDto } from './dto/update-job.dto';
 import { PrismaService } from 'src/modules-system/prisma/prisma.service';
 import { buildQueryPrisma } from 'src/common/helpers/query-pagination.helper';
 import { QueryJobPaginationDto } from './dto/search-job.dto';
-import { Public } from 'src/common/decorators/public.decorator';
 import { FileUploadJobDto } from './dto/upload-file.dto';
 import { CloudinaryService } from 'src/modules-system/cloudinary/cloudinary.service';
 
@@ -13,6 +12,9 @@ export class JobService {
   constructor(private prisma: PrismaService, private cloudinaryService: CloudinaryService) { }
 
   async create(body: CreateJobDto) {
+    const { sub_category_id } = body
+    const subCategory = await this.prisma.jobSubCategories.findUnique({ where: { id: sub_category_id } });
+    if (!subCategory) throw new BadRequestException('Sub category not found');
     return await this.prisma.jobs.create({
       data: body,
     });
@@ -96,8 +98,14 @@ export class JobService {
   }
 
   async update(id: number, updateJobDto: UpdateJobDto) {
+    const { sub_category_id } = updateJobDto
+
     const existingJob = await this.prisma.jobs.findUnique({ where: { id } });
     if (!existingJob) throw new BadRequestException(`Job not found`);
+
+    const subCategory = await this.prisma.jobSubCategories.findUnique({ where: { id: sub_category_id } });
+    if (!subCategory) throw new BadRequestException('Sub category not found');
+
     return await this.prisma.jobs.update({
       where: { id },
       data: updateJobDto,
@@ -107,6 +115,15 @@ export class JobService {
   async remove(id: number) {
     const existingJob = await this.prisma.jobs.findUnique({ where: { id } });
     if (!existingJob) throw new BadRequestException(`Job not found`);
-    return await this.prisma.jobs.delete({ where: { id } });
+
+    await this.prisma.comments.deleteMany({
+      where: { job_id: id }
+    });
+    await this.prisma.hiredJobs.deleteMany({
+      where: { job_id: id }
+    });
+    return await this.prisma.jobs.delete({
+      where: { id }
+    });
   }
 }

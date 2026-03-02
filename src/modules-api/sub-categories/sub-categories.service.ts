@@ -9,6 +9,9 @@ export class JobSubCategoriesService {
   constructor(private prisma: PrismaService, private cloudinaryService: CloudinaryService) { }
 
   async create(data: CreateSubCategoryDto) {
+    const { category_id } = data
+    const category = await this.prisma.jobCategories.findUnique({ where: { id: category_id } });
+    if (!category) throw new BadRequestException('Category not found');
     return await this.prisma.jobSubCategories.create({ data });
   }
 

@@ -7,6 +7,12 @@ import { PrismaService } from 'src/modules-system/prisma/prisma.service';
 export class BookingService {
   constructor(private prisma: PrismaService) { }
   async create(body: CreateBookingDto) {
+    const { job_id, hirer_id } = body;
+    const job = await this.prisma.jobs.findUnique({ where: { id: job_id } });
+    if (!job) throw new BadRequestException('Job not found');
+
+    const hirer = await this.prisma.users.findUnique({ where: { id: hirer_id } });
+    if (!hirer) throw new BadRequestException('Hirer not found');
     const result = await this.prisma.hiredJobs.create({
       data: body
     });
