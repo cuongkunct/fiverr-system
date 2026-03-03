@@ -11,7 +11,7 @@ jobs:
       runs-on: [self-hosted, be-fiverr-system]
 
       steps:
-        # BƯỚC NÀY LÀ BẮT BUỘC để tạo folder _work và lấy file docker-compose.yml
+        # Tạo folder _work trên máy ảo và lấy file docker-compose.yml
         - name: Checkout mã nguồn
           uses: actions/checkout@v4 
 
