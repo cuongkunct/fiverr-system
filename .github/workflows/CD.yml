@@ -8,17 +8,19 @@ on:
 
 jobs:
   starts:
-    runs-on: [self-hosted, be-fiverr-system]
+      runs-on: [self-hosted, be-fiverr-system]
 
-    steps:
-      - name: Dừng container cũ
-        run: sudo docker container stop con-be-fiverr-system || true
+      steps:
+        # BƯỚC NÀY LÀ BẮT BUỘC để tạo folder _work và lấy file docker-compose.yml
+        - name: Checkout mã nguồn
+          uses: actions/checkout@v4 
 
-      - name: Xoá container cũ
-        run: sudo docker container remove con-be-fiverr-system || true
+        - name: Dọn dẹp (nếu cần)
+          run: |
+            sudo docker container stop con-be-fiverr-system || true
+            sudo docker container rm con-be-fiverr-system || true
 
-      - name: Xoá image cũ
-        run: sudo docker image remove cuongvan/img-be-fiverr-system:latest || true
-
-      - name: Kéo và chạy lại image trên docker hub
-        run: docker compose up -d
+        - name: Kéo bản mới và chạy
+          run: |
+            docker compose pull
+            docker compose up -d
