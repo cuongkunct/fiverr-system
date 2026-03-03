@@ -15,12 +15,12 @@ jobs:
         - name: Checkout mã nguồn
           uses: actions/checkout@v4 
 
-        - name: Dọn dẹp (nếu cần)
+        - name: Dọn dẹp container hệ thống trên máy ảo trên dockerhub
           run: |
             sudo docker container stop con-be-fiverr-system || true
             sudo docker container rm con-be-fiverr-system || true
 
-        - name: Kéo bản mới và chạy
+        - name: Kéo bản mới và deploy container
           run: |
             docker compose pull
             docker compose up -d
