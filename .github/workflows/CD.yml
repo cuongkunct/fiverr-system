@@ -12,13 +12,13 @@ jobs:
 
     steps:
       - name: Dừng container cũ
-        run: sudo docker container stop con-be-fiverr-system
+        run: sudo docker container stop con-be-fiverr-system || true
 
       - name: Xoá container cũ
-        run: sudo docker container remove con-be-fiverr-system
+        run: sudo docker container remove con-be-fiverr-system || true
 
       - name: Xoá image cũ
-        run: sudo docker image remove cuongvan/img-be-fiverr-system:latest
+        run: sudo docker image remove cuongvan/img-be-fiverr-system:latest || true
 
       - name: Kéo và chạy lại image trên docker hub
         run: docker compose up -d
